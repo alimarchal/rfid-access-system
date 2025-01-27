@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('location_id')->nullable()->constrained()->onDelete('set null');
             $table->string('name');
-            $table->string('father_name', 100);
-            $table->string('cnic', 15)->unique()->index();
+            $table->string('father_name', 100)->nullable();
+            $table->string('cnic', 15)->nullable()->unique()->index();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreLocationRequest;
 use App\Http\Requests\UpdateLocationRequest;
 use App\Models\Location;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
+use Carbon\Carbon;
 
 class LocationController extends Controller
 {
@@ -13,7 +16,18 @@ class LocationController extends Controller
      */
     public function index()
     {
-        //
+        $locations = QueryBuilder::for(Location::class)
+            ->allowedFilters([
+                AllowedFilter::exact('branch_id'),
+                AllowedFilter::exact('fiscal_year'),
+                AllowedFilter::exact('created_by_user_id'),
+                AllowedFilter::exact('updated_by_user_id'),
+                AllowedFilter::exact('annual_target_amount'),
+            ])
+            ->paginate(10);
+
+
+        return view('locations.index', compact('locations'));
     }
 
     /**
@@ -21,7 +35,8 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('locations.create');
     }
 
     /**
