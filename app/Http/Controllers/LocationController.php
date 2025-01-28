@@ -33,6 +33,8 @@ class LocationController extends Controller
     {
         try {
             Location::create($request->validated());
+        
+
 
             return redirect()
                 ->route('locations.index')
