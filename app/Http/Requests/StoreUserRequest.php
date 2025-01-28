@@ -2,26 +2,36 @@
 
 namespace App\Http\Requests;
 
-class StoreUserRequest
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
+
+class StoreUserRequest extends FormRequest
 {
+    public function authorize(): bool
+    {
+        return true;
+    }
+
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'father_name' => 'required|string|max:100',
-            'cnic' => 'required|regex:/^[0-9]{5}-[0-9]{7}-[0-9]$/|unique:users',
-            'email' => 'required|email|unique:users',
-            'mobile' => 'nullable|regex:/^\+92[0-9]{10}$/',
-            'location_id' => 'nullable|exists:locations,id',
-            'profile_photo' => 'nullable|image|max:2048',
+            'location_id' => ['nullable', 'exists:locations,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'father_name' => ['nullable', 'string', 'max:100'],
+            'cnic' => ['nullable', 'string', 'max:15', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+            'mobile' => ['nullable', 'string', 'max:15'],
+            'telephone' => ['nullable', 'string', 'max:15', 'regex:/^[0-9\-\+\(\)\s]*$/'],
         ];
     }
 
-    public function messages(): array
+    protected function prepareForValidation()
     {
-        return [
-            'cnic.regex' => 'CNIC must be in the format XXXXX-XXXXXXX-X',
-            'mobile.regex' => 'Mobile must be in format +92XXXXXXXXXX',
-        ];
+        if ($this->has('telephone')) {
+            $this->merge([
+                'telephone' => substr(preg_replace('/[^0-9\-\+\(\)\s]/', '', $this->telephone), 0, 15)
+            ]);
+        }
     }
 }

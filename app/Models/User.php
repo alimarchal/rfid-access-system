@@ -4,12 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class User extends Authenticatable
 {
@@ -27,10 +30,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'location_id',
         'name',
+        'status',
+        'is_active',
+        'father_name',
+        'cnic',
         'email',
         'password',
+        'mobile',
+        'telephone',
+        'profile_photo_path'
     ];
+
 
     /**
      * The attributes that should be hidden for serialization.
@@ -58,16 +70,23 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
-    protected function casts(): array
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
+
+
+    public function location(): BelongsTo
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->belongsTo(Location::class);
     }
 
+    public function scopeActive(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
 
-    public function rfidCards(): HasMany
+    public function rfidCards()
     {
         return $this->hasMany(RfidCard::class);
     }
@@ -86,4 +105,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Entry::class);
     }
+
+
 }

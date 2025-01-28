@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('father_name', 100)->nullable();
             $table->string('cnic', 15)->nullable()->unique()->index();
             $table->string('email')->unique();
+            $table->boolean('status')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -26,6 +27,7 @@ return new class extends Migration
             $table->string('telephone', 15)->nullable();
             $table->softDeletes();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
 

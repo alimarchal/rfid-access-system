@@ -1,58 +1,109 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Location;
+
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Location;
 use App\Models\User;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
-
-class UserController
+class UserController extends Controller
 {
     public function index()
     {
-        $users = User::with('location')->paginate(10);
+        $users = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::partial('name'),
+                AllowedFilter::partial('email'),
+                AllowedFilter::partial('cnic'),
+                AllowedFilter::exact('location_id'),
+            ])
+            ->with('location')
+            ->latest()
+            ->paginate(10);
+
         return view('users.index', compact('users'));
     }
 
     public function create()
     {
-        $locations = Location::all();
-        return view('users.form', compact('locations'));
-    }
-
-    public function store(StoreUserRequest $request)
-    {
-        $user = User::create($request->validated());
-
-        return redirect()->route('users.show', $user)
-            ->with('success', 'User created successfully');
+        $locations = Location::orderBy('city')->get();
+        return view('users.create', compact('locations'));
     }
 
     public function show(User $user)
     {
-        $user->load(['rfidCards', 'vehicles', 'familyMembers', 'entries']);
+        $user->load([
+            'location',
+            'rfidCards.assignmentHistories.assignedBy',
+            'vehicles',
+            'familyMembers',
+            'entries' => function ($query) {
+                $query->with(['rfidCard', 'vehicle'])
+                    ->latest()
+                    ->take(10);
+            }
+        ]);
+
         return view('users.show', compact('user'));
+    }
+
+    public function store(StoreUserRequest $request)
+    {
+        try {
+            User::create($request->validated());
+
+            session()->flash('success', 'User created successfully.');
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error creating user. Please try again.');
+            return redirect()->back()->withInput();
+        }
     }
 
     public function edit(User $user)
     {
-        $locations = Location::all();
-        return view('users.form', compact('user', 'locations'));
+        try {
+            $locations = Location::orderBy('city')->get();
+            return view('users.edit', compact('user', 'locations'));
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error loading user data. Please try again.');
+            return redirect()->route('users.index');
+        }
     }
 
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->update($request->validated());
+        try {
+            $validatedData = $request->validated();
 
-        return redirect()->route('users.show', $user)
-            ->with('success', 'User updated successfully');
+            // Only update password if provided
+            if (empty($validatedData['password'])) {
+                unset($validatedData['password']);
+            }
+
+            $user->update($validatedData);
+
+            session()->flash('success', 'User updated successfully.');
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error updating user. Please try again.');
+            return redirect()->back()->withInput();
+        }
     }
 
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('users.index')
-            ->with('success', 'User deleted successfully');
+        try {
+            $user->delete();
+
+            session()->flash('success', 'User deleted successfully.');
+            return redirect()->route('users.index');
+        } catch (\Exception $e) {
+            session()->flash('error', 'Error deleting user. Please try again.');
+            return redirect()->back();
+        }
     }
 }
