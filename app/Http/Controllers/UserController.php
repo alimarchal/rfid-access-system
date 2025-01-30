@@ -159,12 +159,10 @@ class UserController extends Controller
     public function search_by_rfid_card(Request $request)
     {
         $card_number = $request->card_number;
-        $is_card_number_available = RfidCard::where('card_number', $card_number)->exists();
-
-        if ($is_card_number_available) {
-
-            $card = RfidCard::where('card_number', $card_number)->first();
-            $is_card_expired = null;
+        $card = RfidCard::where('card_number', $card_number)->first();  // Retrieve card directly
+    
+        if ($card) {
+            // If card exists, check its status
             $is_card_active = null;
             if ($card->status == "active") {
                 $is_card_active = "active";
@@ -173,19 +171,23 @@ class UserController extends Controller
             } elseif ($card->status == "inactive") {
                 $is_card_active = "inactive";
             }
-
-            if ($is_card_number_available) {
-                return to_route('users.show', ['user' => $card->user_id, 'is_card_active' => $is_card_active, 'rfid_card_id' => $card->id,'user_id' => $card->user_id]);
-            } else {
-
-            }
-
-
-
-
-
+    
+            return to_route('users.show', [
+                'user' => $card->user_id, 
+                'is_card_active' => $is_card_active, 
+                'rfid_card_id' => $card->id,
+                'user_id' => $card->user_id
+            ]);
+        } else {
+            // Add a debug log here
+        
+    
+            // If card doesn't exist, return with error message
+            return back()->with('error',
+             'اس فرد کی کوئی معلومات موجود نہیں ہے ، براہ کرم دوبارہ کوشش کریں، اگر پھر بھی موجود نہ ہو تو یہ مشکوک افراد میں شامل ہو سکتا ہے اور اس کی تصدیق شروع کی جائے۔');
         }
-
-
+        
     }
-}
+    
+   }
+

@@ -49,4 +49,5 @@ Route::get('family-members/create/user/{user}', [RfidCardController::class, 'fam
 
 // Assignment History
 Route::resource('assignment-histories', AssignmentHistoryController::class)->only(['index', 'show']);
+Route::post('/entries', [EntryController::class, 'store'])->name('entries.store');
 Route::get('/administration', [AdministrationController::class, 'index'])->name('administration');

@@ -205,6 +205,120 @@
                     </div>
                 </div>
             </div>
+            {{-- Add this section below the Quick Stats Card --}}
+<!-- Time In/Time Out Entries Section -->
+<div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
+    <div class="p-6">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Time In / Time Out Entries
+        </h3>
+
+      <!-- Entry Form -->
+<div class="mb-6">
+    <form action="{{ route('entries.store') }}" method="POST" class="space-y-4">
+        @csrf
+        <input type="hidden" name="user_id" value="{{ $user->id }}">
+        <input type="hidden" name="rfid_card_id" value="{{ request('rfid_card_id') }}">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <!-- Entry Type Dropdown -->
+            <div>
+                <label for="entry_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Entry Type
+                </label>
+                <select name="entry_type" id="entry_type" class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                    <option value="time_in" selected>Time In</option>
+                    <option value="time_out">Time Out</option>
+                </select>
+            </div>
+
+            <!-- Access Status Dropdown -->
+            <div>
+                <label for="access_status" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Access Status
+                </label>
+                <select name="access_status" id="access_status" class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                    <option value="1" selected>Access Granted</option>
+                    <option value="0">Access Denied</option>
+                </select>
+            </div>
+
+            <!-- Gate ID Dropdown -->
+            <div>
+                <label for="gate_id" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                    Gate ID
+                </label>
+                <select name="gate_id" id="gate_id" class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                    <option value="1" selected>Gate 1</option>
+                    <option value="2">Gate 2</option>
+                    <option value="3">Gate 3</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex items-end">
+                <button type="submit" class="w-full inline-flex justify-center items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    Add Entry
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+        <!-- Entries List -->
+        @if($user->entries->count() > 0)
+            <div class="flow-root">
+                <ul role="list" class="-mb-8">
+                    @foreach($user->entries()->latest()->get() as $entry)
+                        <li>
+                            <div class="relative pb-8">
+                                @if(!$loop->last)
+                                    <span class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-700" aria-hidden="true"></span>
+                                @endif
+                                <div class="relative flex space-x-3">
+                                    <div>
+                                        <span class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center ring-8 ring-white dark:ring-gray-800">
+                                            <svg class="h-4 w-4 text-blue-600 dark:text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
+                                        <div>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                {{ ucfirst($entry->entry_type) }} at
+                                                <span class="font-medium text-gray-900 dark:text-gray-100">
+                                                    {{ $entry->created_at->format('h:i A') }}
+                                                </span>
+                                            </p>
+                                        </div>
+                                        <div class="text-right text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
+                                            {{ $entry->created_at->format('M d, Y') }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        @else
+            <div class="text-center py-8">
+                <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No Entries Found</h3>
+                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Start tracking time by adding an entry.</p>
+            </div>
+        @endif
+    </div>
+</div>
+
             <!-- RFID Cards Section -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-4">
                 <div class="border-b border-gray-200 dark:border-gray-700">

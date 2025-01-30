@@ -137,6 +137,7 @@
             </div>
         </div>
     </div>
+    
 
     @push('modals')
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
