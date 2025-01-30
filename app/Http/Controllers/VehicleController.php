@@ -15,7 +15,7 @@ class VehicleController extends Controller
     public function index(Request $request)
     {
         $vehicles = Vehicle::query();
-    
+
         // Apply filters if present
         if ($request->has('filter')) {
             $filters = $request->input('filter');
@@ -35,12 +35,12 @@ class VehicleController extends Controller
                 $vehicles->where('color', 'like', '%' . $filters['color'] . '%');
             }
         }
-    
+
         $vehicles = $vehicles->paginate(10);
-    
+
         return view('vehicles.index', compact('vehicles'));
     }
-    
+
 
     /**
      * Show the form for creating a new vehicle.
@@ -70,7 +70,9 @@ class VehicleController extends Controller
 
     Vehicle::create($validatedData);
 
-    return redirect()->route('vehicles.index')->with('success', 'Vehicle created successfully.');
+    return redirect()
+    ->route('users.show', $request->user_id)
+    ->with('success', 'Vehicle created successfully.');
 }
 
     /**
@@ -80,7 +82,7 @@ class VehicleController extends Controller
     {
         $vehicle = Vehicle::findOrFail($id); // Find the vehicle by ID
         $users = User::all(); // Get all users, or filter based on your needs
-    
+
         return view('vehicles.edit', compact('vehicle', 'users'));
     }
 
@@ -97,9 +99,9 @@ class VehicleController extends Controller
             'manufacture_year' => 'required|integer',
             'color' => 'required|string|max:255',
         ]);
-    
+
         $vehicle->update($validatedData);
-    
+
         return redirect()->route('vehicles.index')->with('success', 'Vehicle updated successfully.');
     }
 
@@ -108,12 +110,12 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        
-    
+
+
         // Attempt to delete the vehicle
         try {
             $vehicle->delete();
-    
+
             return redirect()->route('vehicles.index')
                 ->with('success', 'Vehicle deleted successfully.');
         } catch (\Exception $e) {
@@ -121,5 +123,22 @@ class VehicleController extends Controller
                 ->with('error', 'There was an issue deleting the vehicle.');
         }
     }
-    
+
+
+
+
+    public function vehicles_create_via_user(Request $request, User $user)
+    {
+        try {
+            $users = User::where('id', $user->id)
+                ->orderBy('name')
+                ->get();
+
+            return view('vehicles.create', compact('users'));
+        } catch (Exception $e) {
+            Log::error('Error in Vehicle create form: ' . $e->getMessage());
+            session()->flash('error', 'Error loading create form. Please try again.');
+            return back();
+        }
+    }
 }

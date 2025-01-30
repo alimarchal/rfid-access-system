@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Models\Location;
 use App\Models\User;
-use Spatie\QueryBuilder\AllowedFilter;
+use App\Models\Location;
+use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 use Faker\Factory;
 
 class UserController extends Controller
 {
+    // Display users list
     public function index()
     {
-
-//        $faker = \Faker\Factory::create();
-//        $uniqueEmail = $faker->unique()->safeEmail();
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
                 AllowedFilter::partial('name'),
@@ -31,12 +28,50 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
+    // Show create form
     public function create()
     {
         $locations = Location::orderBy('city')->get();
         return view('users.create', compact('locations'));
     }
 
+    // Store new user
+    public function store(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'father_name' => 'nullable|string|max:100',
+            'cnic' => 'nullable|string|max:15|unique:users,cnic',
+            'mobile' => 'nullable|string|max:15',
+            'telephone' => 'nullable|string|max:15',
+            'location_id' => 'nullable|exists:locations,id',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            $faker = Factory::create();
+
+            $userData = $validator->validated();
+            $userData['email'] = $faker->unique()->safeEmail();
+            $userData['password'] = bcrypt($faker->password(8, 12));
+
+            User::create($userData);
+
+            return redirect()->route('users.index')
+                ->with('success', 'User created successfully. Credentials were auto-generated.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Error creating user: ' . $e->getMessage());
+        }
+    }
+
+    // Show user details
     public function show(User $user)
     {
         $user->load([
@@ -51,66 +86,65 @@ class UserController extends Controller
             }
         ]);
 
-
-
-
         return view('users.show', compact('user'));
     }
 
-    public function store(StoreUserRequest $request)
-    {
-        try {
-            $user = User::create($request->validated());
-
-            session()->flash('success', 'User created successfully.');
-            return redirect()->route('users.index');
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error creating user. Please try again.');
-            return redirect()->back()->withInput();
-        }
-    }
-
+    // Show edit form
     public function edit(User $user)
     {
-        try {
-            $locations = Location::orderBy('city')->get();
-            return view('users.edit', compact('user', 'locations'));
-        } catch (\Exception $e) {
-            session()->flash('error', 'Error loading user data. Please try again.');
-            return redirect()->route('users.index');
-        }
+        $locations = Location::orderBy('city')->get();
+        return view('users.edit', compact('user', 'locations'));
     }
 
-    public function update(UpdateUserRequest $request, User $user)
+    // Update user
+    public function update(Request $request, User $user)
     {
-        try {
-            $validatedData = $request->validated();
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'father_name' => 'nullable|string|max:100',
+            'cnic' => 'nullable|string|max:15|unique:users,cnic,' . $user->id,
+            'mobile' => 'nullable|string|max:15',
+            'telephone' => 'nullable|string|max:15',
+            'location_id' => 'nullable|exists:locations,id',
+            'password' => 'nullable|string|min:8',
+        ]);
 
-            // Only update password if provided
-            if (empty($validatedData['password'])) {
-                unset($validatedData['password']);
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            $data = $validator->validated();
+
+            if (!empty($data['password'])) {
+                $data['password'] = bcrypt($data['password']);
+            } else {
+                unset($data['password']);
             }
 
-            $user->update($validatedData);
+            $user->update($data);
 
-            session()->flash('success', 'User updated successfully.');
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')
+                ->with('success', 'User updated successfully');
         } catch (\Exception $e) {
-            session()->flash('error', 'Error updating user. Please try again.');
-            return redirect()->back()->withInput();
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Error updating user: ' . $e->getMessage());
         }
     }
 
+    // Delete user
     public function destroy(User $user)
     {
         try {
             $user->delete();
-
-            session()->flash('success', 'User deleted successfully.');
-            return redirect()->route('users.index');
+            return redirect()->route('users.index')
+                ->with('success', 'User deleted successfully');
         } catch (\Exception $e) {
-            session()->flash('error', 'Error deleting user. Please try again.');
-            return redirect()->back();
+            return redirect()->back()
+                ->with('error', 'Error deleting user: ' . $e->getMessage());
         }
     }
 }
