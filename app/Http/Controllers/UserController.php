@@ -8,11 +8,15 @@ use App\Models\Location;
 use App\Models\User;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
+use Faker\Factory;
 
 class UserController extends Controller
 {
     public function index()
     {
+
+//        $faker = \Faker\Factory::create();
+//        $uniqueEmail = $faker->unique()->safeEmail();
         $users = QueryBuilder::for(User::class)
             ->allowedFilters([
                 AllowedFilter::partial('name'),
@@ -56,7 +60,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         try {
-            User::create($request->validated());
+            $user = User::create($request->validated());
 
             session()->flash('success', 'User created successfully.');
             return redirect()->route('users.index');

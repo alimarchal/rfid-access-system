@@ -177,13 +177,13 @@
                             </svg>
                             RFID Cards
                         </h3>
-                        <button onclick="Livewire.emit('openModal', 'add-rfid-card', {{ json_encode(['userId' => $user->id]) }})"
+                        <a href="{{ route('rfid-card.rfid_card_create_via_user', $user->id) }}"
                                 class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
                             <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
                             Add Card
-                        </button>
+                        </a>
                     </div>
                 </div>
                 <div class="p-1">

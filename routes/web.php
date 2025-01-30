@@ -21,14 +21,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
- 
+
+    Route::resource('/locations', LocationController::class);
     Route::resource('/users', UserController::class);
     Route::resource('rfid-cards', RfidCardController::class);
+    Route::get('rfid-cards/create/user/{user}', [RfidCardController::class, 'rfid_card_create_via_user'])->name('rfid-card.rfid_card_create_via_user');
     Route::post('rfid-cards/{rfidCard}/reassign', [RfidCardController::class, 'reassign'])->name('rfid-cards.reassign');
     Route::resource('vehicles', VehicleController::class);
-    Route::resource('/locations', LocationController::class);
 
-  
+
 });
 
 

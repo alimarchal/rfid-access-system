@@ -85,7 +85,7 @@ class RfidCardController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('rfid-cards.index')
+                ->route('users.show', $request->user_id)
                 ->with('success', 'RFID card has been created successfully.');
 
         } catch (Exception $e) {
@@ -255,4 +255,23 @@ class RfidCardController extends Controller
             return back()->with('error', 'Error deactivating RFID card. Please try again.');
         }
     }
+
+
+    public function rfid_card_create_via_user(Request $request, User $user)
+    {
+        try {
+            $users = User::where('id', $user->id)
+                ->orderBy('name')
+                ->get();
+
+            return view('rfid-cards.create', compact('users'));
+        } catch (Exception $e) {
+            Log::error('Error in RFID card create form: ' . $e->getMessage());
+            session()->flash('error', 'Error loading create form. Please try again.');
+            return back();
+        }
+    }
+
+
+
 }
