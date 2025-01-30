@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use App\Models\Location;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Models\Location;
+use App\Models\RfidCard;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Faker\Factory;
@@ -146,5 +154,38 @@ class UserController extends Controller
             return redirect()->back()
                 ->with('error', 'Error deleting user: ' . $e->getMessage());
         }
+    }
+
+    public function search_by_rfid_card(Request $request)
+    {
+        $card_number = $request->card_number;
+        $is_card_number_available = RfidCard::where('card_number', $card_number)->exists();
+
+        if ($is_card_number_available) {
+
+            $card = RfidCard::where('card_number', $card_number)->first();
+            $is_card_expired = null;
+            $is_card_active = null;
+            if ($card->status == "active") {
+                $is_card_active = "active";
+            } elseif ($card->status == "expired") {
+                $is_card_active = "expired";
+            } elseif ($card->status == "inactive") {
+                $is_card_active = "inactive";
+            }
+
+            if ($is_card_number_available) {
+                return to_route('users.show', ['user' => $card->user_id, 'is_card_active' => $is_card_active, 'rfid_card_id' => $card->id,'user_id' => $card->user_id]);
+            } else {
+
+            }
+
+
+
+
+
+        }
+
+
     }
 }
