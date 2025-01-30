@@ -31,6 +31,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'location_id',
+        'role',
         'name',
         'status',
         'is_active',
@@ -91,7 +92,7 @@ class User extends Authenticatable
         return $this->hasMany(RfidCard::class);
     }
 
-   
+
 public function vehicles()
 {
     return $this->hasMany(Vehicle::class);

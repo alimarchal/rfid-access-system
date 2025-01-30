@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('telephone', 15)->nullable();
             $table->softDeletes();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->enum('role',['Admin','Guard','Citizens'])->default('Citizens');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
