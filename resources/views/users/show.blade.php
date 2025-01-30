@@ -168,64 +168,73 @@
                 </div>
             </div>
             <!-- RFID Cards Section -->
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-4">
                 <div class="border-b border-gray-200 dark:border-gray-700">
-                    <div class="p-6 flex justify-between items-center">
+                    <div class="p-4 flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center">
-                            <svg class="w-5 h-5 mr-2 text-blue-600 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <svg class="w-4 h-4 mr-2 text-blue-600 animate-pulse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 9a2 2 0 10-4 0v5a2 2 0 01-2 2h6m-6-4h4m8 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                             RFID Cards
                         </h3>
                         <button onclick="Livewire.emit('openModal', 'add-rfid-card', {{ json_encode(['userId' => $user->id]) }})"
-                                class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
-                            <svg class="w-4 h-4 mr-2 transition-transform duration-300 group-hover:rotate-90" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                            <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                             </svg>
-                            Add RFID Card
+                            Add Card
                         </button>
                     </div>
                 </div>
-                <div class="p-6">
+                <div class="p-1">
                     @if($user->rfidCards->count() > 0)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 animate-cards">
                             @foreach($user->rfidCards as $card)
-                                <div class="group relative bg-white rounded-2xl border border-gray-200 shadow-lg transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
-                                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r
-          {{ $card->status === 'active' ? 'from-green-400 to-green-600' :
-             ($card->status === 'inactive' ? 'from-red-400 to-red-600' :
-             'from-yellow-400 to-yellow-600') }}">
+                                <div class="group relative bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-cardEntrance"
+                                     style="animation-delay: {{ $loop->index * 100 }}ms">
+                                    <div class="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r transition-colors duration-300
+                            {{ $card->status === 'active' ? 'from-green-400 to-green-600' :
+                               ($card->status === 'inactive' ? 'from-red-400 to-red-600' :
+                               'from-yellow-400 to-yellow-600') }}">
                                     </div>
 
-                                    <div class="p-6 space-y-6">
+                                    <div class="p-3 space-y-2">
                                         <div class="flex items-center justify-between">
-                                            <div class="space-y-1.5">
-                                                <p class="text-sm font-medium text-gray-500">Card Number</p>
-                                                <p class="font-mono text-xl font-bold text-gray-900 tracking-wider">
+                                            <div class="space-y-0.5">
+                                                <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 transition-colors duration-300">Card Number</p>
+                                                <p class="font-mono text-sm font-bold text-gray-900 tracking-wider group-hover:text-blue-600 transition-colors duration-300">
                                                     {{ $card->card_number }}
                                                 </p>
                                             </div>
-                                            <div class="h-4 w-4 rounded-full {{ $card->status === 'active' ? 'bg-green-500' : ($card->status === 'inactive' ? 'bg-red-500' : 'bg-yellow-500') }} animate-pulse"></div>
+                                            <div class="flex space-x-2 items-center">
+                                                <button onclick="Livewire.emit('openModal', 'edit-rfid-card', {{ json_encode(['cardId' => $card->id]) }})"
+                                                        class="p-1 text-gray-400 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 transform hover:scale-110 active:scale-95">
+                                                    <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                    </svg>
+                                                </button>
+                                                <div class="h-2.5 w-2.5 rounded-full {{ $card->status === 'active' ? 'bg-green-500' : ($card->status === 'inactive' ? 'bg-red-500' : 'bg-yellow-500') }} animate-pulse"></div>
+                                            </div>
                                         </div>
 
-                                        <div class="space-y-1.5">
-                                            <p class="text-sm font-medium text-gray-500">Status</p>
-                                            <span class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-semibold
-              {{ $card->status === 'active' ? 'bg-green-100 text-green-800' :
-                 ($card->status === 'inactive' ? 'bg-red-100 text-red-800' :
-                 'bg-yellow-100 text-yellow-800') }}">
-              <div class="w-2 h-2 rounded-full mr-2
-                {{ $card->status === 'active' ? 'bg-green-500' :
-                   ($card->status === 'inactive' ? 'bg-red-500' :
-                   'bg-yellow-500') }}">
-              </div>
-              {{ ucfirst($card->status) }}
-            </span>
+                                        <div class="space-y-0.5">
+                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 transition-colors duration-300">Status</p>
+                                            <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold transition-colors duration-300
+                                    {{ $card->status === 'active' ? 'bg-green-100 text-green-800' :
+                                       ($card->status === 'inactive' ? 'bg-red-100 text-red-800' :
+                                       'bg-yellow-100 text-yellow-800') }}">
+                                    <div class="w-1.5 h-1.5 rounded-full mr-1
+                                        {{ $card->status === 'active' ? 'bg-green-500' :
+                                           ($card->status === 'inactive' ? 'bg-red-500' :
+                                           'bg-yellow-500') }}">
+                                    </div>
+                                    {{ ucfirst($card->status) }}
+                                </span>
                                         </div>
 
-                                        <div class="space-y-1.5">
-                                            <p class="text-sm font-medium text-gray-500">Expiry Date</p>
-                                            <p class="text-lg font-semibold text-gray-900">
+                                        <div class="space-y-0.5">
+                                            <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700 transition-colors duration-300">Expiry Date</p>
+                                            <p class="text-sm font-semibold text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
                                                 {{ $card->expiry_date->format('M d, Y') }}
                                             </p>
                                         </div>
@@ -234,19 +243,19 @@
                             @endforeach
                         </div>
                     @else
-                        <div class="bg-white rounded-2xl p-12 text-center space-y-6">
-                            <div class="relative w-24 h-24 mx-auto">
+                        <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
+                            <div class="relative w-14 h-14 mx-auto">
                                 <svg class="w-full h-full text-gray-400 animate-pulse" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 9a2 2 0 10-4 0v5a2 2 0 01-2 2h6m-6-4h4m8 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <div class="absolute -right-2 -bottom-2 w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center animate-bounce">
-                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="absolute -right-1 -bottom-1 w-5 h-5 bg-blue-600 rounded-full flex items-center justify-center animate-bounce">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                     </svg>
                                 </div>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-900">No RFID Cards</h3>
-                            <p class="text-gray-500">Get started by adding a new RFID card.</p>
+                            <h3 class="text-base font-bold text-gray-900">No RFID Cards</h3>
+                            <p class="text-sm text-gray-500">Get started by adding a new RFID card.</p>
                         </div>
                     @endif
                 </div>

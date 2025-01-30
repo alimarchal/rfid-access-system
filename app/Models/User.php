@@ -86,7 +86,7 @@ class User extends Authenticatable
         return $query->where('is_active', true);
     }
 
-    public function rfidCards()
+    public function rfidCards(): HasMany
     {
         return $this->hasMany(RfidCard::class);
     }

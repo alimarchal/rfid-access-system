@@ -22,7 +22,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/users', UserController::class);
     Route::resource('rfid-cards', RfidCardController::class);
     Route::post('rfid-cards/{rfidCard}/reassign', [RfidCardController::class, 'reassign'])->name('rfid-cards.reassign');
-
     Route::resource('vehicles', VehicleController::class);
 });
 
