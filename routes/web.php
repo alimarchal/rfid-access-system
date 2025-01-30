@@ -44,3 +44,4 @@ Route::resource('users.family-members', FamilyMemberController::class)->shallow(
 
 // Assignment History
 Route::resource('assignment-histories', AssignmentHistoryController::class)->only(['index', 'show']);
+Route::post('/entries', [EntryController::class, 'store'])->name('entries.store');

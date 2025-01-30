@@ -103,7 +103,7 @@ public function vehicles()
         return $this->hasMany(FamilyMember::class);
     }
 
-    public function entries(): HasMany
+    public function entries()
     {
         return $this->hasMany(Entry::class);
     }

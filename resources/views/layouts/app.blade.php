@@ -17,6 +17,7 @@
     <script src="{{ url('jsandcss/knockout-3.5.1.js') }}" defer></script>
     <script src="{{ url('jsandcss/daterangepicker.min.js') }}" defer></script>
     @stack('header')
+    
 
     <style>
         .select2 {

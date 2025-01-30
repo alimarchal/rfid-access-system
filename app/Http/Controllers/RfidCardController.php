@@ -6,12 +6,13 @@ use App\Http\Requests\StoreRfidCardRequest;
 use App\Http\Requests\UpdateRfidCardRequest;
 use App\Models\RfidCard;
 use App\Models\User;
-use Illuminate\Http\Request;
+
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class RfidCardController extends Controller
 {
@@ -121,6 +122,7 @@ class RfidCardController extends Controller
             return back()->with('error', 'Error retrieving RFID card details.');
         }
     }
+    
 
     /**
      * Show the form for editing the specified RFID card.

@@ -4,24 +4,47 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Model
 {
-    /** @use HasFactory<\Database\Factories\EntryFactory> */
     use HasFactory;
-    public function user(): BelongsTo
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'rfid_card_id',
+        'access_granted',
+        'time_in',
+        'time_out',
+        'entry_type',
+        'access_status',
+        'gate_id',
+        'created_by'
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'access_status' => 'boolean',
+        'gate_id' => 'integer',
+    ];
+
+    /**
+     * Get the user that owns the entry.
+     */
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-
-    public function rfidCard(): BelongsTo
+    public function gate()
     {
-        return $this->belongsTo(RfidCard::class);
-    }
-
-    public function vehicle(): BelongsTo
-    {
-        return $this->belongsTo(Vehicle::class);
+        return $this->belongsTo(Gate::class);
     }
 }
