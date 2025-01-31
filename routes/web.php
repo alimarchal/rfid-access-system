@@ -11,6 +11,7 @@ use App\Http\Controllers\{
     LocationController,
     AssignmentHistoryController,
     AdministrationController,
+    ReportController,
 
 };
 Route::get('/', function () {
@@ -46,7 +47,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::get('/administration', [AdministrationController::class, 'index'])->name('administration');
 
+
+     Route::get('reports', [ReportController::class, 'index'])->name('reports');
+
 });
-
-
-
