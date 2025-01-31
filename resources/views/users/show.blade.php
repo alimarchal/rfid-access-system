@@ -77,8 +77,8 @@
                                     </label>
                                     <select name="access_status" id="access_status"
                                         class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                                        <option value="1" selected>Access Granted</option>
-                                        <option value="0">Access Denied</option>
+                                        <option value="1" selected>Granted</option>
+                                        <option value="0">Denied</option>
                                     </select>
                                 </div>
 
