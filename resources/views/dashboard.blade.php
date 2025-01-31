@@ -14,34 +14,35 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl opacity-10 blur-xl"></div>
                     <div class="relative bg-white backdrop-blur-lg shadow-xl rounded-2xl overflow-hidden border border-gray-100">
                         <div class="p-6 sm:p-8 lg:p-10 space-y-8">
+                            <x-status-custom-message />
                             <div class="max-w-xl mx-auto">
                                 <div class="text-center mb-8">
                                     <h2 class="text-2xl font-bold text-gray-900 sm:text-3xl">Card Verification</h2>
                                     <p class="mt-2 text-gray-600">Please scan or enter the card number below</p>
                                 </div>
 
-                                <x-status-message class="mb-6 transform transition-all duration-300 text-right" style="direction: rtl;" />
+
                                 <x-validation-errors class="mb-6 transform transition-all duration-300" style="direction: rtl; text-align: right;" />
 
 
-                                
+
                                 <form method="POST" action="{{ route('search_by_rfid_card') }}" class="space-y-6">
                                     @csrf
                                     <div class="space-y-4">
                                         <div class="relative group">
-                                            <x-label for="card_number" value="Card No" :required="true" 
+                                            <x-label for="card_number" value="Card No"
                                                 class="text-sm font-medium text-gray-700 mb-1 transition-colors duration-200" />
                                             <div class="relative">
-                                                <x-input 
-                                                    id="card_number" 
-                                                    type="text" 
-                                                    name="card_number" 
-                                                    class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-gray-700 shadow-sm transition duration-200 ease-in-out focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:border-blue-400" 
-                                                    :value="old('card_number')" 
-                                                    required 
+                                                <x-input
+                                                    id="card_number"
+                                                    type="text"
+                                                    name="card_number"
+                                                    class="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-gray-700 shadow-sm transition duration-200 ease-in-out focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:border-blue-400"
+                                                    :value="old('card_number')"
+                                                    required
                                                     maxlength="255"
                                                     placeholder="Enter card number here..."
-                                                    autofocus 
+                                                    autofocus
                                                 />
                                                 <div class="absolute inset-0 rounded-xl transition duration-300 group-hover:ring-4 group-hover:ring-blue-50"></div>
                                             </div>
@@ -80,7 +81,7 @@
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0px); }
         }
-        
+
         .animate-float {
             animation: float 3s ease-in-out infinite;
         }

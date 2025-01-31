@@ -122,7 +122,7 @@ class RfidCardController extends Controller
             return back()->with('error', 'Error retrieving RFID card details.');
         }
     }
-    
+
 
     /**
      * Show the form for editing the specified RFID card.
@@ -267,6 +267,21 @@ class RfidCardController extends Controller
                 ->get();
 
             return view('family-members.create', compact('users'));
+        } catch (Exception $e) {
+            Log::error('Error in RFID card create form: ' . $e->getMessage());
+            session()->flash('error', 'Error loading create form. Please try again.');
+            return back();
+        }
+    }
+
+
+    public function rfid_card_create_via_user(Request $request, User $user)
+    {
+        try {
+            $users = User::where('id', $user->id)
+                ->orderBy('name')
+                ->get();
+            return view('rfid-cards.create', compact('users'));
         } catch (Exception $e) {
             Log::error('Error in RFID card create form: ' . $e->getMessage());
             session()->flash('error', 'Error loading create form. Please try again.');

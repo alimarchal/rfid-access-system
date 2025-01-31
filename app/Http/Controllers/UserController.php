@@ -8,13 +8,9 @@ use App\Models\Location;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Models\Location;
 use App\Models\RfidCard;
-use App\Models\User;
-use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
-use Spatie\QueryBuilder\AllowedFilter;
 use Faker\Factory;
 
 class UserController extends Controller
@@ -94,6 +90,8 @@ class UserController extends Controller
             }
         ]);
 
+
+
         return view('users.show', compact('user'));
     }
 
@@ -160,7 +158,7 @@ class UserController extends Controller
     {
         $card_number = $request->card_number;
         $card = RfidCard::where('card_number', $card_number)->first();  // Retrieve card directly
-    
+
         if ($card) {
             // If card exists, check its status
             $is_card_active = null;
@@ -171,23 +169,23 @@ class UserController extends Controller
             } elseif ($card->status == "inactive") {
                 $is_card_active = "inactive";
             }
-    
+
             return to_route('users.show', [
-                'user' => $card->user_id, 
-                'is_card_active' => $is_card_active, 
+                'user' => $card->user_id,
+                'is_card_active' => $is_card_active,
                 'rfid_card_id' => $card->id,
                 'user_id' => $card->user_id
             ]);
         } else {
             // Add a debug log here
-        
-    
+
+
             // If card doesn't exist, return with error message
             return back()->with('error',
              'اس فرد کی کوئی معلومات موجود نہیں ہے ، براہ کرم دوبارہ کوشش کریں، اگر پھر بھی موجود نہ ہو تو یہ مشکوک افراد میں شامل ہو سکتا ہے اور اس کی تصدیق شروع کی جائے۔');
         }
-        
+
     }
-    
+
    }
 

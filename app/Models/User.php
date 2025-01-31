@@ -93,10 +93,10 @@ class User extends Authenticatable
     }
 
 
-public function vehicles()
-{
-    return $this->hasMany(Vehicle::class);
-}
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
+    }
 
     public function familyMembers(): HasMany
     {
@@ -107,6 +107,8 @@ public function vehicles()
     {
         return $this->hasMany(Entry::class);
     }
+
+
 
 
 }

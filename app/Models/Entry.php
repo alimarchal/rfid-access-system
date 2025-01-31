@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Entry extends Model
 {
@@ -18,6 +19,7 @@ class Entry extends Model
         'user_id',
         'rfid_card_id',
         'access_granted',
+        'vehicle_id',
         'time_in',
         'time_out',
         'entry_type',
@@ -43,8 +45,19 @@ class Entry extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function gate()
+//    public function gate()
+//    {
+//        return $this->belongsTo(Gate::class);
+//    }
+
+    public function rfidCard(): BelongsTo
     {
-        return $this->belongsTo(Gate::class);
+        return $this->belongsTo(RfidCard::class);
     }
+
+    public function vehicle(): BelongsTo
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
 }
