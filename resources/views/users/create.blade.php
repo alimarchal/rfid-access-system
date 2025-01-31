@@ -55,6 +55,7 @@
                                     :value="old('telephone')" maxlength="15" />
                             </div>
 
+
                             <div>
                                 <x-label for="location_id" value="Location" />
                                 <select id="location_id" name="location_id"
@@ -67,6 +68,12 @@
                                         </option>
                                     @endforeach
                                 </select>
+                            </div>
+
+                            <div>
+                                <x-label for="profile_photo_path" value="Profile Photo" />
+                                <input id="profile_photo_path" type="file" name="profile_photo_path"
+                                    class="mt-1 block w-full" />
                             </div>
                         </div>
 

@@ -66,13 +66,31 @@
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
+                            <div>
+                                <x-label for="profile_photo_path" value="Profile Photo" />
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-button class="ml-4">
-                                Update User
-                            </x-button>
-                        </div>
+                                <!-- If there's an existing profile photo, display it -->
+                                @if ($user->profile_photo_path)
+                                    <div class="mt-2">
+                                        <p>Current Profile Photo:</p>
+                                        <img src="{{ asset('storage/' . $user->profile_photo_path) }}"
+                                            alt="Profile Photo" width="100" height="100" />
+                                        <p><a href="{{ route('your.route.deletePhoto', $user->id) }}"
+                                                class="text-red-600">Remove Photo</a></p>
+                                    </div>
+                                @endif
+
+                                <!-- File input for uploading new profile photo -->
+                                <x-input id="profile_photo_path" type="file" name="profile_photo"
+                                    class="mt-1 block w-full" />
+                            </div>
+
+
+                            <div class="flex items-center justify-end mt-4">
+                                <x-button class="ml-4">
+                                    Update User
+                                </x-button>
+                            </div>
                     </form>
                 </div>
             </div>

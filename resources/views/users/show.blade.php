@@ -250,14 +250,19 @@
                                     </p>
                                 </div>
                             @endforeach
-                        </div>
-                        <div class="mt-6 flex justify-center">
-                            <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
-                                class="bg-white text-purple-600 font-bold text-sm py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 hover:text-white transition duration-300">
-                                + Add Member
-                            </a>
-                        </div>
 
+                        </div>
+                        @if (request()->has('rfid_card_id'))
+                            @if (auth()->user()->role == 'Admin')
+                                <div class="mt-6 flex justify-center">
+                                    <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
+                                        class="bg-white text-purple-600 font-bold text-sm py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 hover:text-white transition duration-300">
+                                        + Add Member
+                                    </a>
+                                </div>
+                            @endif
+
+                        @endif
                     </div>
                 </div>
 
@@ -278,17 +283,20 @@
                             <div
                                 class="bg-blue-500 rounded-lg shadow-lg p-4 text-white text-center transform transition-all duration-300 hover:scale-105">
                                 <p class="text-lg font-semibold">RFID Cards</p>
-                                <p class="text-3xl font-bold mt-2 animate-pulse">{{ $user->rfidCards->count() }}</p>
+                                <p class="text-3xl font-bold mt-2 animate-pulse">
+                                    {{ $user->rfidCards->count() }}</p>
                             </div>
                             <div
                                 class="bg-green-500 rounded-lg shadow-lg p-4 text-white text-center transform transition-all duration-300 hover:scale-105">
                                 <p class="text-lg font-semibold">Vehicles</p>
-                                <p class="text-3xl font-bold mt-2 animate-pulse">{{ $user->vehicles->count() }}</p>
+                                <p class="text-3xl font-bold mt-2 animate-pulse">
+                                    {{ $user->vehicles->count() }}</p>
                             </div>
                             <div
                                 class="bg-yellow-500 rounded-lg shadow-lg p-4 text-white text-center transform transition-all duration-300 hover:scale-105">
                                 <p class="text-lg font-semibold">Total Entries</p>
-                                <p class="text-3xl font-bold mt-2 animate-pulse">{{ $user->accessLogs?->count() }}0
+                                <p class="text-3xl font-bold mt-2 animate-pulse">
+                                    {{ $user->accessLogs?->count() }}0
                                 </p>
                             </div>
                             <div
@@ -321,15 +329,19 @@
                             </svg>
                             RFID Cards
                         </h3>
-                        <a href="{{ route('rfid-card.rfid_card_create_via_user', $user->id) }}"
-                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                            <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add Card
-                        </a>
+                        @if (request()->has('rfid_card_id'))
+                            @if (auth()->user()->role == 'Admin')
+                                <a href="{{ route('rfid-card.rfid_card_create_via_user', $user->id) }}"
+                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                    <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Add Card
+                                </a>
+                            @endif
+                        @endif
                     </div>
                 </div>
                 <div class="p-1">
@@ -449,15 +461,19 @@
                             </svg>
                             Family Members
                         </h3>
-                        <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
-                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                            <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add Family Member
-                        </a>
+                        @if (request()->has('rfid_card_id'))
+                            @if (auth()->user()->role == 'Admin')
+                                <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
+                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                    <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Add Family Member
+                                </a>
+                            @endif
+                        @endif
                     </div>
                 </div>
 
@@ -471,11 +487,13 @@
                                     <div class="p-3 space-y-2">
                                         <div class="space-y-0.5">
                                             <p class="text-xs font-medium text-gray-500">Name</p>
-                                            <p class="text-sm font-bold text-gray-900">{{ $member->name }}</p>
+                                            <p class="text-sm font-bold text-gray-900">
+                                                {{ $member->name }}</p>
                                         </div>
 
                                         <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Relationship</p>
+                                            <p class="text-xs font-medium text-gray-500">Relationship
+                                            </p>
                                             <p class="text-sm font-semibold text-gray-800">
                                                 {{ ucfirst($member->relationship) }}</p>
                                         </div>
@@ -487,7 +505,8 @@
                                         </div>
 
                                         <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Date of Birth</p>
+                                            <p class="text-xs font-medium text-gray-500">Date of Birth
+                                            </p>
                                             <p class="text-sm font-semibold text-gray-800">
                                                 {{ $member->date_of_birth ? \Carbon\Carbon::parse($member->date_of_birth)->format('M d, Y') : 'Not provided' }}
                                             </p>
@@ -506,11 +525,14 @@
                     @else
                         <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
                             <h3 class="text-base font-bold text-gray-900">No Family Members</h3>
-                            <p class="text-sm text-gray-500">Get started by adding a new family member.</p>
+                            <p class="text-sm text-gray-500">Get started by adding a new family member.
+                            </p>
                         </div>
                     @endif
                 </div>
             </div>
+
+
 
             <!-- Vehicles Section -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
@@ -524,62 +546,62 @@
                             </svg>
                             Vehicles
                         </h3>
-
-                        <a href="{{ route('vehicles.vehicles_create_via_user', $user->id) }}"
-                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                            <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 4v16m8-8H4" />
-                            </svg>
-                            Add Vehicle
-                        </a>
+                        @if (request()->has('rfid_card_id'))
+                            @if (auth()->user()->role == 'Admin')
+                                <a href="{{ route('vehicles.vehicles_create_via_user', $user->id) }}"
+                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                    <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 4v16m8-8H4" />
+                                    </svg>
+                                    Add Vehicle
+                                </a>
+                            @endif
+                        @endif
                     </div>
                 </div>
 
-                <div class="p-1">
+                <div class="p-6">
                     @if ($user->vehicles->count() > 0)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 animate-cards">
-                            @foreach ($user->vehicles as $vehicle)
-                                <div class="group relative bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-cardEntrance"
-                                    style="animation-delay: {{ $loop->index * 100 }}ms">
-
-                                    <div class="p-3 space-y-2">
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Vehicle Number</p>
-                                            <p class="text-sm font-bold text-gray-900">{{ $vehicle->vehicle_no }}</p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Make</p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ ucfirst($vehicle->make) }}
-                                            </p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Model</p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ ucfirst($vehicle->model) }}
-                                            </p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Manufacture Year</p>
-                                            <p class="text-sm font-semibold text-gray-800">
+                        <div class="overflow-x-auto shadow-md rounded-lg">
+                            <table class="min-w-full table-auto">
+                                <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
+                                    <tr>
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">Vehicle
+                                            Number
+                                        </th>
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">Make</th>
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">Model
+                                        </th>
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">
+                                            Manufacture Year
+                                        </th>
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">Color
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 dark:text-gray-300">
+                                    @foreach ($user->vehicles as $vehicle)
+                                        <tr
+                                            class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                            <td class="px-4 py-2 text-sm">{{ $vehicle->vehicle_no }}
+                                            </td>
+                                            <td class="px-4 py-2 text-sm capitalize">
+                                                {{ $vehicle->make }}</td>
+                                            <td class="px-4 py-2 text-sm capitalize">
+                                                {{ $vehicle->model }}
+                                            </td>
+                                            <td class="px-4 py-2 text-sm">
                                                 {{ $vehicle->manufacture_year }}
-                                            </p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Color</p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ ucfirst($vehicle->color) }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                                            </td>
+                                            <td class="px-4 py-2 text-sm capitalize">
+                                                {{ $vehicle->color }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     @else
                         <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
@@ -589,6 +611,7 @@
                     @endif
                 </div>
             </div>
+
 
 
 
@@ -657,8 +680,10 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No Entries Found</h3>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Start tracking time by adding an
+                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No Entries
+                                Found</h3>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Start tracking time by
+                                adding an
                                 entry.</p>
                         </div>
                     @endif
