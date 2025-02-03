@@ -647,7 +647,7 @@
                             <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
                                 <tr>
                                     <th class="px-4 py-2 text-left text-sm font-semibold">Entry Type</th>
-                                    <th class="px-4 py-2 text-left text-sm font-semibold">Gate</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Gate No</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold">Time</th>
                                     <th class="px-4 py-2 text-left text-sm font-semibold">Date</th>
 
