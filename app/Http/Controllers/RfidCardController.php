@@ -174,7 +174,7 @@ class RfidCardController extends Controller
             DB::commit();
 
             return redirect()
-                ->route('rfid-cards.index')
+            ->route('users.show', $request->user_id)
                 ->with('success', 'RFID card has been updated successfully.');
         } catch (Exception $e) {
             DB::rollBack();

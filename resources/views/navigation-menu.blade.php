@@ -18,9 +18,11 @@
                     <x-nav-link href="{{ route('administration') }}" :active="request()->routeIs('administration')">
                         {{ __('Administration') }}
                     </x-nav-link>
-                    <x-nav-link href="{{ route('reports') }}" :active="request()->routeIs('administration')">
-                        {{ __('Reports') }}
-                    </x-nav-link>
+                    @if (auth()->user()->role == 'Admin')
+                        <x-nav-link href="{{ route('reports') }}" :active="request()->routeIs('administration')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
+                    @endif
 
                 </div>
             </div>

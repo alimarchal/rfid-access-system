@@ -22,10 +22,10 @@
             <!-- Profile Header -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
                 <div class="bg-gradient-to-r from-blue-800 to-blue-600 h-32">
-                       <span
-                           class="px-3 py-1 inline-flex text-sm leading-5 font-semibold float-left {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $user->is_active ? 'Active' : 'Inactive' }}
-                                </span>
+                    <span
+                        class="px-3 py-1 inline-flex text-sm leading-5 font-semibold float-left {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                        {{ $user->is_active ? 'Active' : 'Inactive' }}
+                    </span>
                 </div>
                 <div class="px-6 py-4 relative">
                     <div class="flex items-center">
@@ -48,15 +48,15 @@
                         </div>
                         <div class="ml-40">
                             <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $user->name }}</h1>
-{{--                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->father_name }}</p>--}}
+                            {{--                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->father_name }}</p> --}}
                             <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->cnic }}</p>
-{{--                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->mobile }}</p>--}}
-{{--                            <div class="mt-2">--}}
-{{--                                <span--}}
-{{--                                    class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">--}}
-{{--                                    {{ $user->is_active ? 'Active' : 'Inactive' }}--}}
-{{--                                </span>--}}
-{{--                            </div>--}}
+                            {{--                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->mobile }}</p> --}}
+                            {{--                            <div class="mt-2"> --}}
+                            {{--                                <span --}}
+                            {{--                                    class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}"> --}}
+                            {{--                                    {{ $user->is_active ? 'Active' : 'Inactive' }} --}}
+                            {{--                                </span> --}}
+                            {{--                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -102,21 +102,6 @@
                                         <option value="3">Gate 3</option>
                                     </select>
                                 </div>
-
-                                <!-- Entry Type Dropdown -->
-                                <div>
-                                    <label for="entry_type"
-                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                                        Entry Type
-                                    </label>
-                                    <select name="entry_type" id="entry_type"
-                                        class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                                        <option value="time_in" selected>Time In</option>
-                                        <option value="time_out">Time Out</option>
-                                    </select>
-                                </div>
-
-
                                 <div>
                                     <label for="vehicle_id"
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -137,6 +122,22 @@
 
                                     </select>
                                 </div>
+                                <!-- Entry Type Dropdown -->
+                                <div>
+                                    <label for="entry_type"
+                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                                        Entry Type
+                                    </label>
+                                    <select name="entry_type" id="entry_type"
+                                        class="block w-full rounded-md border-gray-300 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                                        <option value="time_in">Time In</option>
+                                        <option value="time_out">Time Out</option>
+                                    </select>
+                                    </select>
+                                </div>
+
+
+
 
 
                                 <!-- Submit Button -->
@@ -259,17 +260,16 @@
                             @endforeach
 
                         </div>
-                        @if (request()->has('rfid_card_id'))
-                            @if (auth()->user()->role == 'Admin')
-                                <div class="mt-6 flex justify-center">
-                                    <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
-                                        class="bg-white text-purple-600 font-bold text-sm py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 hover:text-white transition duration-300">
-                                        + Add Member
-                                    </a>
-                                </div>
-                            @endif
 
+                        @if (auth()->user()->role == 'Admin')
+                            <div class="mt-6 flex justify-center">
+                                <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
+                                    class="bg-white text-purple-600 font-bold text-sm py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 hover:text-white transition duration-300">
+                                    + Add Member
+                                </a>
+                            </div>
                         @endif
+
                     </div>
                 </div>
 
@@ -336,19 +336,19 @@
                             </svg>
                             RFID Cards
                         </h3>
-                        @if (request()->has('rfid_card_id'))
-                            @if (auth()->user()->role == 'Admin')
-                                <a href="{{ route('rfid-card.rfid_card_create_via_user', $user->id) }}"
-                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                                    <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Add Card
-                                </a>
-                            @endif
+
+                        @if (auth()->user()->role == 'Admin')
+                            <a href="{{ route('rfid-card.rfid_card_create_via_user', $user->id) }}"
+                                class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add Card
+                            </a>
                         @endif
+
                     </div>
                 </div>
                 <div class="p-1">
@@ -378,16 +378,18 @@
                                                 </p>
                                             </div>
                                             <div class="flex space-x-2 items-center">
-                                                <button
-                                                    onclick="Livewire.emit('openModal', 'edit-rfid-card', {{ json_encode(['cardId' => $card->id]) }})"
-                                                    class="p-1 text-gray-400 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 transform hover:scale-110 active:scale-95">
-                                                    <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg"
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
-                                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                                    </svg>
-                                                </button>
+                                                @if (auth()->user()->role == 'Admin')
+                                                    <a href="{{ route('rfid-cards.edit', $card) }}"
+                                                        class="p-1 text-gray-400 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 transform hover:scale-110 active:scale-95">
+                                                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                                        </svg>
+                                                    </a>
+                                                @endif
+
                                                 <div
                                                     class="h-2.5 w-2.5 rounded-full {{ $card->status === 'active' ? 'bg-green-500' : ($card->status === 'inactive' ? 'bg-red-500' : 'bg-yellow-500') }} animate-pulse">
                                                 </div>
@@ -456,6 +458,7 @@
             </div>
 
 
+
             <!-- Family Members Section -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-4">
                 <div class="border-b border-gray-200 dark:border-gray-700">
@@ -468,77 +471,68 @@
                             </svg>
                             Family Members
                         </h3>
-                        @if (request()->has('rfid_card_id'))
-                            @if (auth()->user()->role == 'Admin')
-                                <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
-                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                                    <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Add Family Member
-                                </a>
-                            @endif
+
+                        @if (auth()->user()->role == 'Admin')
+                            <a href="{{ route('family-members.rfid_card_create_via_user', $user->id) }}"
+                                class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add Family Member
+                            </a>
                         @endif
                     </div>
                 </div>
 
-                <div class="p-1">
-                    @if ($user->familyMembers->count() > 0)
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 animate-cards">
-                            @foreach ($user->familyMembers as $member)
-                                <div class="group relative bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md animate-cardEntrance"
-                                    style="animation-delay: {{ $loop->index * 100 }}ms">
-
-                                    <div class="p-3 space-y-2">
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Name</p>
-                                            <p class="text-sm font-bold text-gray-900">
-                                                {{ $member->name }}</p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Relationship
-                                            </p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ ucfirst($member->relationship) }}</p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Gender</p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ ucfirst($member->gender) }}</p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">Date of Birth
-                                            </p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ $member->date_of_birth ? \Carbon\Carbon::parse($member->date_of_birth)->format('M d, Y') : 'Not provided' }}
-                                            </p>
-                                        </div>
-
-                                        <div class="space-y-0.5">
-                                            <p class="text-xs font-medium text-gray-500">CNIC</p>
-                                            <p class="text-sm font-semibold text-gray-800">
-                                                {{ $member->cnic ?? 'Not provided' }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
-                            <h3 class="text-base font-bold text-gray-900">No Family Members</h3>
-                            <p class="text-sm text-gray-500">Get started by adding a new family member.
-                            </p>
-                        </div>
-                    @endif
-                </div>
+                @if ($user->familyMembers->count() > 0)
+                    <div class="overflow-x-auto shadow-md">
+                        <table class="min-w-full table-auto">
+                            <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Name</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Relationship</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Gender</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Date of Birth</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">CNIC</th>
+                                    @if (auth()->user()->role == 'Admin')
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">Action</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 dark:text-gray-300">
+                                @foreach ($user->familyMembers as $member)
+                                    <tr
+                                        class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-2 text-sm">{{ $member->name }}</td>
+                                        <td class="px-4 py-2 text-sm capitalize">{{ ucfirst($member->relationship) }}
+                                        </td>
+                                        <td class="px-4 py-2 text-sm capitalize">{{ ucfirst($member->gender) }}</td>
+                                        <td class="px-4 py-2 text-sm">
+                                            {{ $member->date_of_birth ? \Carbon\Carbon::parse($member->date_of_birth)->format('M d, Y') : 'Not provided' }}
+                                        </td>
+                                        <td class="px-4 py-2 text-sm">{{ $member->cnic ?? 'Not provided' }}</td>
+                                        <td>
+                                            @if (auth()->user()->role == 'Admin')
+                                                <a href="{{ route('family-members.edit', $member) }}"
+                                                    class="inline-flex items-center px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                                    Edit
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
+                        <h3 class="text-base font-bold text-gray-900">No Family Members</h3>
+                        <p class="text-sm text-gray-500">Get started by adding a new family member.</p>
+                    </div>
+                @endif
             </div>
-
 
 
             <!-- Vehicles Section -->
@@ -553,19 +547,19 @@
                             </svg>
                             Vehicles
                         </h3>
-                        @if (request()->has('rfid_card_id'))
-                            @if (auth()->user()->role == 'Admin')
-                                <a href="{{ route('vehicles.vehicles_create_via_user', $user->id) }}"
-                                    class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                                    <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    Add Vehicle
-                                </a>
-                            @endif
+
+                        @if (auth()->user()->role == 'Admin')
+                            <a href="{{ route('vehicles.vehicles_create_via_user', $user->id) }}"
+                                class="inline-flex items-center px-3 py-1.5 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                                <svg class="w-3 h-3 mr-1.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                Add Vehicle
+                            </a>
                         @endif
+
                     </div>
                 </div>
 
@@ -573,39 +567,51 @@
                     <div class="overflow-x-auto shadow-md">
                         <table class="min-w-full table-auto">
                             <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
-                            <tr>
-                                <th class="px-4 py-2 text-left text-sm font-semibold">Vehicle
-                                    Number
-                                </th>
-                                <th class="px-4 py-2 text-left text-sm font-semibold">Make</th>
-                                <th class="px-4 py-2 text-left text-sm font-semibold">Model
-                                </th>
-                                <th class="px-4 py-2 text-left text-sm font-semibold">
-                                    Manufacture Year
-                                </th>
-                                <th class="px-4 py-2 text-left text-sm font-semibold">Color
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Vehicle
+                                        Number
+                                    </th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Make</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Model
+                                    </th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">
+                                        Manufacture Year
+                                    </th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Color
+                                    </th>
+                                    @if (auth()->user()->role == 'Admin')
+                                        <th class="px-4 py-2 text-left text-sm font-semibold">Action
+                                        </th>
+                                    @endif
+                                </tr>
                             </thead>
                             <tbody class="text-gray-600 dark:text-gray-300">
-                            @foreach ($user->vehicles as $vehicle)
-                                <tr
-                                    class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                    <td class="px-4 py-2 text-sm">{{ $vehicle->vehicle_no }}
-                                    </td>
-                                    <td class="px-4 py-2 text-sm capitalize">
-                                        {{ $vehicle->make }}</td>
-                                    <td class="px-4 py-2 text-sm capitalize">
-                                        {{ $vehicle->model }}
-                                    </td>
-                                    <td class="px-4 py-2 text-sm">
-                                        {{ $vehicle->manufacture_year }}
-                                    </td>
-                                    <td class="px-4 py-2 text-sm capitalize">
-                                        {{ $vehicle->color }}
-                                    </td>
-                                </tr>
-                            @endforeach
+                                @foreach ($user->vehicles as $vehicle)
+                                    <tr
+                                        class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-2 text-sm">{{ $vehicle->vehicle_no }}
+                                        </td>
+                                        <td class="px-4 py-2 text-sm capitalize">
+                                            {{ $vehicle->make }}</td>
+                                        <td class="px-4 py-2 text-sm capitalize">
+                                            {{ $vehicle->model }}
+                                        </td>
+                                        <td class="px-4 py-2 text-sm">
+                                            {{ $vehicle->manufacture_year }}
+                                        </td>
+                                        <td class="px-4 py-2 text-sm capitalize">
+                                            {{ $vehicle->color }}
+                                        </td>
+                                        <td>
+                                            @if (auth()->user()->role == 'Admin')
+                                                <a href="{{ route('vehicles.edit', $vehicle) }}"
+                                                    class="inline-flex items-center px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                                    Edit
+                                                </a>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -622,78 +628,64 @@
 
             <!-- Time In/Time Out Entries Section -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
-                <div class="p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Time In / Time Out Entries
-                    </h3>
-
-
-                    <!-- Entries List -->
-                    @if ($user->entries->count() > 0)
-                        <div class="flow-root">
-                            <ul role="list" class="-mb-8">
-                                @foreach ($user->entries()->latest()->get() as $entry)
-                                    <li>
-                                        <div class="relative pb-8">
-                                            @if (!$loop->last)
-                                                <span
-                                                    class="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200 dark:bg-gray-700"
-                                                    aria-hidden="true"></span>
-                                            @endif
-                                            <div class="relative flex space-x-3">
-                                                <div>
-                                                    <span
-                                                        class="h-8 w-8 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center ring-8 ring-white dark:ring-gray-800">
-                                                        <svg class="h-4 w-4 text-blue-600 dark:text-blue-400"
-                                                            xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke="currentColor">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
-                                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                        </svg>
-                                                    </span>
-                                                </div>
-                                                <div class="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
-                                                    <div>
-                                                        <p class="text-sm text-gray-500 dark:text-gray-400">
-                                                            {{ ucfirst($entry->entry_type) }} at
-                                                            <span class="font-medium text-gray-900 dark:text-gray-100">
-                                                                {{ $entry->created_at->format('h:i A') }}
-                                                            </span>
-                                                        </p>
-                                                    </div>
-                                                    <div
-                                                        class="text-right text-sm whitespace-nowrap text-gray-500 dark:text-gray-400">
-                                                        {{ $entry->created_at->format('M d, Y') }}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @else
-                        <div class="text-center py-8">
-                            <svg class="mx-auto h-12 w-12 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="border-b border-gray-200 dark:border-gray-700">
+                    <div class="p-2 flex justify-between items-center">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">No Entries
-                                Found</h3>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Start tracking time by
-                                adding an
-                                entry.</p>
-                        </div>
-                    @endif
+                            Time In / Time Out Entries
+                        </h3>
+                    </div>
                 </div>
+
+                @if ($user->entries->count() > 0)
+                    <div class="overflow-x-auto shadow-md">
+                        <table class="min-w-full table-auto">
+                            <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
+                                <tr>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Entry Type</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Gate</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Time</th>
+                                    <th class="px-4 py-2 text-left text-sm font-semibold">Date</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600 dark:text-gray-300">
+                                @foreach ($user->entries()->latest()->get() as $entry)
+                                    <tr
+                                        class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                        <td class="px-4 py-2 text-sm capitalize">
+                                            @if ($entry->time_in !== null)
+                                                In
+                                            @elseif ($entry->time_out !== null)
+                                                Out
+                                            @else
+                                                {{ $entry->entry_type === 'time_in' ? 'In' : 'Out' }}
+                                            @endif
+                                        </td>
+                                        <td class="px-4 py-2 text-sm"> {{ $entry->gate_id }}</td>
+                                        <td class="px-4 py-2 text-sm">{{ $entry->created_at->format('h:i A') }}</td>
+                                        <td class="px-4 py-2 text-sm">{{ $entry->created_at->format('M d, Y') }}</td>
+
+
+                                    </tr>
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
+                        <h3 class="text-base font-bold text-gray-900">No Entries Found</h3>
+                        <p class="text-sm text-gray-500">Start tracking time by adding an entry.</p>
+                    </div>
+                @endif
             </div>
+
 
         </div>
     </div>

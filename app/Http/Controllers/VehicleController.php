@@ -102,7 +102,8 @@ class VehicleController extends Controller
 
         $vehicle->update($validatedData);
 
-        return redirect()->route('vehicles.index')->with('success', 'Vehicle updated successfully.');
+        return redirect()->route('users.show', $request->user_id)
+        ->with('success', 'Vehicle updated successfully.');
     }
 
     /**
