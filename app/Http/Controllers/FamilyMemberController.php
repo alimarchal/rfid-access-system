@@ -59,7 +59,7 @@ class FamilyMemberController extends Controller
             // Update the family member with validated data
             $familyMember->update($request->validated());
 
-            return redirect()->route('family-members.index')
+            return redirect()->route('users.show', $request->user_id)
                 ->with('success', 'Family member updated successfully.');
         } catch (\Exception $e) {
             return redirect()->back()

@@ -30,9 +30,7 @@ class UserController extends Controller
             ->paginate(10);
 
 
-        if(auth()->user()->role == "Guard"){
-            abort(403);
-        }
+
 
         return view('users.index', compact('users'));
     }
@@ -103,6 +101,9 @@ class UserController extends Controller
     // Show edit form
     public function edit(User $user)
     {
+        if(auth()->user()->role == "Guard"){
+            abort(403);
+        }
         $locations = Location::orderBy('city')->get();
         return view('users.edit', compact('user', 'locations'));
     }
@@ -118,6 +119,7 @@ class UserController extends Controller
             'telephone' => 'nullable|string|max:15',
             'location_id' => 'nullable|exists:locations,id',
             'password' => 'nullable|string|min:8',
+             'profile_photo_path' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -149,6 +151,9 @@ class UserController extends Controller
     // Delete user
     public function destroy(User $user)
     {
+        if(auth()->user()->role == "Guard"){
+            abort(403);
+        }
         try {
             $user->delete();
             return redirect()->route('users.index')
@@ -193,4 +198,3 @@ class UserController extends Controller
     }
 
    }
-

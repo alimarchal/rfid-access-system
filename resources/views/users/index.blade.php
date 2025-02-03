@@ -15,13 +15,15 @@
                 </svg>
                 Search
             </button>
-            <a href="{{ route('users.create') }}"
-                class="inline-flex items-center ml-2 px-4 py-2 bg-blue-950 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-950 focus:bg-green-800 active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                </svg>
-                <span class="hidden md:inline-block">Add User</span>
-            </a>
+            @if (auth()->user()->role == 'Admin')
+                <a href="{{ route('users.create') }}"
+                    class="inline-flex items-center ml-2 px-4 py-2 bg-blue-950 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-950 focus:bg-green-800 active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
+                    <span class="hidden md:inline-block">Add User</span>
+                </a>
+            @endif
         </div>
     </x-slot>
 
@@ -102,42 +104,43 @@
                                                 class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 mr-2">
                                                 View
                                             </a>
+                                            @if (auth()->user()->role == 'Admin')
+                                                <a href="{{ route('users.edit', $user) }}"
+                                                    class="inline-flex items-center px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                                                    Edit
+                                                </a>
 
-                                            <a href="{{ route('users.edit', $user) }}"
-                                                class="inline-flex items-center px-4 py-2 bg-green-800 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                                                Edit
-                                            </a>
-
-                                            <form class="inline-block" method="POST"
-                                                action="{{ route('users.destroy', $user) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit"
-                                                    class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 delete-button">
-                                                    Delete
-                                                </button>
-                                            </form>
+                                                <form class="inline-block" method="POST"
+                                                    action="{{ route('users.destroy', $user) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 delete-button">
+                                                        Delete
+                                                    </button>
+                                                </form>
                                         </td>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="px-2 py-2">
-                        {{ $users->links() }}
-                    </div>
-                @else
-                    <p class="text-gray-700 dark:text-gray-300 text-center py-4">
-                        No users found.
-                        <a href="{{ route('users.create') }}" class="text-blue-600 hover:underline">
-                            Add a new user
-                        </a>
-                    </p>
-                @endif
+                                @endif
+                @endforeach
+                </tbody>
+                </table>
             </div>
+            <div class="px-2 py-2">
+                {{ $users->links() }}
+            </div>
+        @else
+            <p class="text-gray-700 dark:text-gray-300 text-center py-4">
+                No users found.
+                <a href="{{ route('users.create') }}" class="text-blue-600 hover:underline">
+                    Add a new user
+                </a>
+            </p>
+            @endif
         </div>
     </div>
-    
+    </div>
+
 
     @push('modals')
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
