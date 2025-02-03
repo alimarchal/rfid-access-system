@@ -29,6 +29,11 @@ class UserController extends Controller
             ->latest()
             ->paginate(10);
 
+
+        if(auth()->user()->role == "Guard"){
+            abort(403);
+        }
+
         return view('users.index', compact('users'));
     }
 

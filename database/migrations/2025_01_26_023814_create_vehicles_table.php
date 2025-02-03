@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('vehicle_no')->unique()->comment('Format: ABC-123');
+            $table->string('vehicle_no')->unique()->comment('Format: ABC-123')->nullable();
             $table->string('make')->nullable();
             $table->string('model')->nullable();
             $table->year('manufacture_year')->nullable();

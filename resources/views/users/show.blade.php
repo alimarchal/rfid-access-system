@@ -21,7 +21,12 @@
 
             <!-- Profile Header -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
-                <div class="bg-gradient-to-r from-blue-800 to-blue-600 h-32"></div>
+                <div class="bg-gradient-to-r from-blue-800 to-blue-600 h-32">
+                       <span
+                           class="px-3 py-1 inline-flex text-sm leading-5 font-semibold float-left {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ $user->is_active ? 'Active' : 'Inactive' }}
+                                </span>
+                </div>
                 <div class="px-6 py-4 relative">
                     <div class="flex items-center">
                         <div class="absolute -top-16">
@@ -43,13 +48,15 @@
                         </div>
                         <div class="ml-40">
                             <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">{{ $user->name }}</h1>
-                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->email }}</p>
-                            <div class="mt-2">
-                                <span
-                                    class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $user->is_active ? 'Active' : 'Inactive' }}
-                                </span>
-                            </div>
+{{--                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->father_name }}</p>--}}
+                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->cnic }}</p>
+{{--                            <p class="text-sm text-gray-500 dark:text-gray-400">{{ $user->mobile }}</p>--}}
+{{--                            <div class="mt-2">--}}
+{{--                                <span--}}
+{{--                                    class="px-3 py-1 inline-flex text-sm leading-5 font-semibold rounded-full {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">--}}
+{{--                                    {{ $user->is_active ? 'Active' : 'Inactive' }}--}}
+{{--                                </span>--}}
+{{--                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -537,7 +544,7 @@
             <!-- Vehicles Section -->
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg mb-6">
                 <div class="border-b border-gray-200 dark:border-gray-700">
-                    <div class="p-6 flex justify-between items-center">
+                    <div class="p-2 flex justify-between items-center">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 flex items-center">
                             <svg class="w-5 h-5 mr-2 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -559,58 +566,55 @@
                                 </a>
                             @endif
                         @endif
-
                     </div>
                 </div>
 
-                <div class="p-6">
-                    @if ($user->vehicles->count() > 0)
-                        <div class="overflow-x-auto shadow-md rounded-lg">
-                            <table class="min-w-full table-auto">
-                                <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
-                                    <tr>
-                                        <th class="px-4 py-2 text-left text-sm font-semibold">Vehicle
-                                            Number
-                                        </th>
-                                        <th class="px-4 py-2 text-left text-sm font-semibold">Make</th>
-                                        <th class="px-4 py-2 text-left text-sm font-semibold">Model
-                                        </th>
-                                        <th class="px-4 py-2 text-left text-sm font-semibold">
-                                            Manufacture Year
-                                        </th>
-                                        <th class="px-4 py-2 text-left text-sm font-semibold">Color
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody class="text-gray-600 dark:text-gray-300">
-                                    @foreach ($user->vehicles as $vehicle)
-                                        <tr
-                                            class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                                            <td class="px-4 py-2 text-sm">{{ $vehicle->vehicle_no }}
-                                            </td>
-                                            <td class="px-4 py-2 text-sm capitalize">
-                                                {{ $vehicle->make }}</td>
-                                            <td class="px-4 py-2 text-sm capitalize">
-                                                {{ $vehicle->model }}
-                                            </td>
-                                            <td class="px-4 py-2 text-sm">
-                                                {{ $vehicle->manufacture_year }}
-                                            </td>
-                                            <td class="px-4 py-2 text-sm capitalize">
-                                                {{ $vehicle->color }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @else
-                        <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
-                            <h3 class="text-base font-bold text-gray-900">No Vehicles</h3>
-                            <p class="text-sm text-gray-500">Get started by adding a new vehicle.</p>
-                        </div>
-                    @endif
-                </div>
+                @if ($user->vehicles->count() > 0)
+                    <div class="overflow-x-auto shadow-md">
+                        <table class="min-w-full table-auto">
+                            <thead class="bg-blue-950 dark:bg-gray-700 text-white dark:text-gray-100">
+                            <tr>
+                                <th class="px-4 py-2 text-left text-sm font-semibold">Vehicle
+                                    Number
+                                </th>
+                                <th class="px-4 py-2 text-left text-sm font-semibold">Make</th>
+                                <th class="px-4 py-2 text-left text-sm font-semibold">Model
+                                </th>
+                                <th class="px-4 py-2 text-left text-sm font-semibold">
+                                    Manufacture Year
+                                </th>
+                                <th class="px-4 py-2 text-left text-sm font-semibold">Color
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-gray-600 dark:text-gray-300">
+                            @foreach ($user->vehicles as $vehicle)
+                                <tr
+                                    class="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                                    <td class="px-4 py-2 text-sm">{{ $vehicle->vehicle_no }}
+                                    </td>
+                                    <td class="px-4 py-2 text-sm capitalize">
+                                        {{ $vehicle->make }}</td>
+                                    <td class="px-4 py-2 text-sm capitalize">
+                                        {{ $vehicle->model }}
+                                    </td>
+                                    <td class="px-4 py-2 text-sm">
+                                        {{ $vehicle->manufacture_year }}
+                                    </td>
+                                    <td class="px-4 py-2 text-sm capitalize">
+                                        {{ $vehicle->color }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                @else
+                    <div class="bg-white rounded-lg p-6 text-center space-y-3 animate-fadeIn">
+                        <h3 class="text-base font-bold text-gray-900">No Vehicles</h3>
+                        <p class="text-sm text-gray-500">Get started by adding a new vehicle.</p>
+                    </div>
+                @endif
             </div>
 
 
