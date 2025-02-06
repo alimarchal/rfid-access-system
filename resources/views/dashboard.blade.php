@@ -152,9 +152,11 @@
                 </div>
             </div>
         </div>
+
     @elseif(auth()->user()->role == "Admin")
         <div class="py-12">
             {{-- Admin content commented section remains unchanged --}}
+            sss
         </div>
     @elseif(auth()->user()->role == "Citizen")
         <div class="py-12">
