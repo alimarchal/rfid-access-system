@@ -32,8 +32,16 @@ class EntryController extends Controller
                 $time_out = Carbon::now();
             }
         }
+        $vehicle_id = null;
+        if (request()->has('vehicle_id')) {
+            if ($request->vehicle_id == "NULL") {
+                $vehicle_id = null;
+            } else {
+                $vehicle_id = $request->vehicle_id;
+            }
 
-        // dd($request->all());
+        }
+
         $entry = Entry::create([
             'user_id' => $request->user_id,
             'rfid_card_id' => $request->rfid_card_id,
@@ -41,7 +49,7 @@ class EntryController extends Controller
             'time_out' => $time_out,
             'access_granted' => $request->access_status,
             'gate_id' => $request->gate_id,
-            'vehicle_id' => $request->vehicle_id,
+            'vehicle_id' => $vehicle_id,
             'verified_at' => now(), // Record the current time as verification time
         ]);
 
