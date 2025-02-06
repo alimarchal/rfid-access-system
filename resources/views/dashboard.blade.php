@@ -2,101 +2,9 @@
     @if(auth()->user()->role == "Admin")
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-        
+
         </h2>
     </x-slot>
-    
-    <div class="py-6">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="grid grid-cols-12 mb-4 gap-6">
-
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Total Users</div>
-                                <div class="mt-1 text-base font-extrabold text-black">43</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Total Enteries</div>
-                                <div class="mt-1 text-base font-extrabold text-black">12</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Inactive Cards</div>
-                                <div class="mt-1 text-base font-extrabold text-black">20</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Active RFID Cards</div>
-                                <div class="mt-1 text-base font-extrabold text-black">4</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Registered Vehicles</div>
-                                <div class="mt-1 text-base font-extrabold text-black">29</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Access Granted</div>
-                                <div class="mt-1 text-base font-extrabold text-black">23</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-                    </a>
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Access Denied</div>
-                                <div class="mt-1 text-base font-extrabold text-black">21</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-                    </a>
-                    <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                        <div class="p-5 flex justify-between">
-                            <div>
-                                <div class="text-1xl font-bold leading-8">Expired Cards</div>
-                                <div class="mt-1 text-base font-extrabold text-black">33</div>
-                            </div>
-                            <img src="{{ url('') }}" alt="" class="">
-                        </div>
-                    </a>
-                </div>
-
-                <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                    <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                        <h3 class="text-lg font-semibold">Welcome, Admin!</h3>
-                        <p class="text-gray-600">Manage the bank's operations, monitor branch performance, and set targets.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
     @endif
 
     @if(auth()->user()->role == "Guard")
@@ -154,10 +62,97 @@
         </div>
 
     @elseif(auth()->user()->role == "Admin")
-        <div class="py-12">
-            {{-- Admin content commented section remains unchanged --}}
-            sss
-        </div>
+            <div class="py-6">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-12 mb-4 gap-6">
+
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Total Users</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">43</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Total Enteries</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">12</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Inactive Cards</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">20</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Active RFID Cards</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">4</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Registered Vehicles</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">29</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Access Granted</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">23</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+                        </a>
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Access Denied</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">21</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+                        </a>
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-bold leading-8">Expired Cards</div>
+                                    <div class="mt-1 text-base font-extrabold text-black">33</div>
+                                </div>
+                                <img src="{{ url('') }}" alt="" class="">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                        <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
+                            <h3 class="text-lg font-semibold">Welcome, Admin!</h3>
+                            <p class="text-gray-600">Manage the bank's operations, monitor branch performance, and set targets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
     @elseif(auth()->user()->role == "Citizen")
         <div class="py-12">
         </div>
