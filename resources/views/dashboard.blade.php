@@ -65,7 +65,7 @@
     @elseif(auth()->user()->role == "Admin")
             <div class="py-6">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="grid grid-cols-12 mb-4 gap-6 pb-6">
+                  <div class="grid grid-cols-12 mb-4 gap-6 pb-6">
 
                         <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                             <div class="p-5 flex justify-between">
@@ -258,6 +258,7 @@ new ApexCharts(document.querySelector("#cardStatusChart"), cardStatusOptions).re
         });
     </script>
 
+</body>
 </html>
 
     @elseif(auth()->user()->role == "Citizen")
