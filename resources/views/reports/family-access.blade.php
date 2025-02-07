@@ -1,5 +1,4 @@
 <x-app-layout>
-
     @push('header')
         <link rel="stylesheet" href="{{ url('jsandcss/daterangepicker.min.css') }}">
         <script src="{{ url('jsandcss/moment.min.js') }}"></script>
@@ -7,17 +6,14 @@
         <script src="{{ url('jsandcss/daterangepicker.min.js') }}" defer></script>
     @endpush
 
-
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight inline-block">
-            Settings
+            Family Member Report
         </h2>
 
         <div class="flex justify-center items-center float-right">
-
-            <a href="{{ route('reports') }}"
+            <a href="{{ route('reports.all-reports') }}"
                 class="inline-flex items-center ml-2 px-4 py-2 bg-blue-950 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-800 focus:bg-green-800 active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                <!-- Arrow Left Icon SVG -->
                 <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -25,10 +21,7 @@
                 </svg>
             </a>
         </div>
-
     </x-slot>
-
-
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -37,21 +30,35 @@
                     class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                     <div class="p-5 flex justify-between">
                         <div>
-                            {{--  <div class="text-3xl font-bold leading-8">{{ \App\Models\User::count() }}</div>  --}}
-                            <div class="mt-1 text-base font-extrabold text-black">Reports</div>
+                            <div class="mt-1 text-base font-extrabold text-black">Family Reports</div>
                         </div>
-                        <img src="{{ url('icons-images/user.png') }}" alt="Users" class="h-14 w-14">
+                        <img src="{{ url('icons-images/family.png') }}" alt="Family" class="h-14 w-14">
                     </div>
                 </a>
             </div>
+
+            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <table class="min-w-full text-sm text-gray-900 dark:text-gray-300">
+                    <thead class="bg-gray-800 text-white">
+                        <tr class="bg-blue-800 text-white uppercase text-sm">
+                            <th class="py-2 px-4 text-left">Name</th>
+                            <th class="py-2 px-4 text-left">Relation</th>
+                            <th class="py-2 px-4 text-left">Age</th>
+                            <th class="py-2 px-4 text-left">Contact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($familyMembers as $member)
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-2 px-4">{{ $member->name }}</td>
+                                <td class="py-2 px-4">{{ $member->relation }}</td>
+                                <td class="py-2 px-4">{{ $member->age }}</td>
+                                <td class="py-2 px-4">{{ $member->contact }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-
-    </div>
-    </div>
-    </div>
-
-
-
 </x-app-layout>
