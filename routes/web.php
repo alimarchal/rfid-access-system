@@ -15,7 +15,7 @@ use App\Http\Controllers\{
 
 };
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('login');
 });
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::resource('vehicles', VehicleController::class);
@@ -23,7 +23,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard');})->name('dashboard');
-   
+
 
     Route::resource('/administration/locations', LocationController::class);
     Route::resource('/administration/users', UserController::class);
