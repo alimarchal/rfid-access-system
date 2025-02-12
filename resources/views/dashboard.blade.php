@@ -1,3 +1,4 @@
+
 <x-app-layout>
     @if(auth()->user()->role == "Admin")
     <x-slot name="header">
@@ -64,95 +65,202 @@
     @elseif(auth()->user()->role == "Admin")
             <div class="py-6">
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-12 mb-4 gap-6">
+                  <div class="grid grid-cols-12 mb-4 gap-6 pb-6">
 
                         <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                             <div class="p-5 flex justify-between">
                                 <div>
-                                    <div class="text-1xl font-bold leading-8">Total Users</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">43</div>
+                                    <div class="text-1xl font-medium leading-8">Total Users</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">43</div>
                                 </div>
-                                <img src="{{ url('') }}" alt="" class="">
-                            </div>
-                        </a>
-
-                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                            <div class="p-5 flex justify-between">
-                                <div>
-                                    <div class="text-1xl font-bold leading-8">Total Enteries</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">12</div>
-                                </div>
-                                <img src="{{ url('') }}" alt="" class="">
+                                <img src="{{url('icons-images/users.png') }}" alt="Users" class="h-16 w-16">
                             </div>
                         </a>
 
                         <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                             <div class="p-5 flex justify-between">
                                 <div>
-                                    <div class="text-1xl font-bold leading-8">Inactive Cards</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">20</div>
+                                    <div class="text-1xl font-medium leading-8">Total Enteries</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">12</div>
                                 </div>
-                                <img src="{{ url('') }}" alt="" class="">
+                                <img src="{{url('icons-images/enteries.png') }}" alt="Enteries" class="h-16 w-16">
+                            </div>
+                        </a>
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-medium leading-8">Active RFID Cards</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">4</div>
+                                </div>
+                                <img src="{{url('icons-images/active.png') }}" alt="Active" class="h-16 w-16">
                             </div>
                         </a>
 
                         <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                             <div class="p-5 flex justify-between">
                                 <div>
-                                    <div class="text-1xl font-bold leading-8">Active RFID Cards</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">4</div>
+                                    <div class="text-1xl font-medium leading-8">Inactive Cards</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">20</div>
                                 </div>
-                                <img src="{{ url('') }}" alt="" class="">
+                                <img src="{{ url('icons-images/inactive.png') }}" alt="Inactive" class="h-16 w-16">
+                            </div>
+                        </a>
+
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-medium leading-8">Registered Vehicles</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">29</div>
+                                </div>
+                                <img src="{{url('icons-images/vehicles.png') }}" alt="Vehicles" class="h-16 w-16">
                             </div>
                         </a>
                         <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                             <div class="p-5 flex justify-between">
                                 <div>
-                                    <div class="text-1xl font-bold leading-8">Registered Vehicles</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">29</div>
+                                    <div class="text-1xl font-medium leading-8">Access Granted</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">23</div>
                                 </div>
-                                <img src="{{ url('') }}" alt="" class="">
-                            </div>
-                        </a>
-                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                            <div class="p-5 flex justify-between">
-                                <div>
-                                    <div class="text-1xl font-bold leading-8">Access Granted</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">23</div>
-                                </div>
-                                <img src="{{ url('') }}" alt="" class="">
-                            </div>
-                        </a>
-                        </a>
-                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
-                            <div class="p-5 flex justify-between">
-                                <div>
-                                    <div class="text-1xl font-bold leading-8">Access Denied</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">21</div>
-                                </div>
-                                <img src="{{ url('') }}" alt="" class="">
+                                <img src="{{url('icons-images/granted.png') }}" alt="Access" class="h-16 w-16">
                             </div>
                         </a>
                         </a>
                         <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
                             <div class="p-5 flex justify-between">
                                 <div>
-                                    <div class="text-1xl font-bold leading-8">Expired Cards</div>
-                                    <div class="mt-1 text-base font-extrabold text-black">33</div>
+                                    <div class="text-1xl font-medium leading-8">Access Denied</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">21</div>
                                 </div>
-                                <img src="{{ url('') }}" alt="" class="">
+                                <img src="{{url('icons-images/denied.png') }}" alt="Denied" class="h-16 w-16">
+                            </div>
+                        </a>
+                        </a>
+                        <a href="#" class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+                            <div class="p-5 flex justify-between">
+                                <div>
+                                    <div class="text-1xl font-medium leading-8">Expired Cards</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">33</div>
+                                </div>
+                                <img src="{{ url('icons-images/expired1.png') }}" alt="Expired" class="h-16 w-16">
                             </div>
                         </a>
                     </div>
 
-                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                        <div class="p-6 lg:p-8 bg-white border-b border-gray-200">
-                            <h3 class="text-lg font-semibold">Welcome, Admin!</h3>
-                            <p class="text-gray-600">Manage the bank's operations, monitor branch performance, and set targets.</p>
-                        </div>
-                    </div>
-                </div>
+                
+                    <!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <div class="bg-white rounded-lg shadow p-6 transform transition duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+            <h2 class="text-xl font-semibold mb-4">Today's Traffic Pattern</h2>
+            <div class="chart-container">
+                <div id="trafficChart"></div>
             </div>
+        </div>
+        
+        <div class="bg-white rounded-lg shadow p-6 transform transition duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+            <h2 class="text-xl font-semibold mb-4">Weekly Vehicle Traffic</h2>
+            <div class="chart-container">
+                <div id="vehicleChart"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="bg-white rounded-lg shadow p-6 transform transition duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+            <h2 class="text-xl font-semibold mb-4">RFID Card Status Distribution</h2>
+            <div class="chart-container">
+                <div id="cardStatusChart"></div>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6 transform transition duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+            <h2 class="text-xl font-semibold mb-4">Unauthorized Access Attempts</h2>
+            <div class="chart-container">
+                <canvas id="unauthorizedAttemptsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</body>
+
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var trafficOptions = {
+    chart: { 
+        type: 'line',
+        toolbar: { show: false }  // This hides the zoom and other controls
+    },
+    series: [
+        { name: 'Entries', data: [12, 5, 45, 28, 52, 20] },
+        { name: 'Exits', data: [8, 3, 30, 25, 48, 25] }
+    ],
+    xaxis: { categories: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'] }
+};
+new ApexCharts(document.querySelector("#trafficChart"), trafficOptions).render();
+
+
+            var vehicleOptions = {
+                chart: { type: 'bar' },
+                series: [{ name: 'Vehicle Count', data: [150, 180, 165, 190, 210, 140, 120] }],
+                xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }
+            };
+            var vehicleOptions = {
+    chart: { 
+        type: 'bar',
+        height: "100%",  // Ensures it fits inside the container
+        width: "100%" 
+    },
+    series: [{ name: 'Vehicle Count', data: [150, 180, 165, 190, 210, 140, 120] }],
+    xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }
+};
+new ApexCharts(document.querySelector("#vehicleChart"), vehicleOptions).render();
+
+var cardStatusOptions = {
+    chart: { 
+        type: 'donut',
+        height: "100%",  // Ensures it fits inside the container
+        width: "100%" 
+    },
+    series: [750, 120, 30],
+    labels: ['Active', 'Expired', 'Inactive']
+};
+new ApexCharts(document.querySelector("#cardStatusChart"), cardStatusOptions).render();
+
+       const unauthorizedAttemptsData = {
+                labels: ['Gate 1', 'Gate 2', 'Gate 3'],
+                datasets: [{
+                    label: 'Attempts',
+                    data: [3, 5, 2],
+                    backgroundColor: ['#EF4444', '#F59E0B', '#6366F1']
+                }]
+            };
+
+            new Chart(document.getElementById('unauthorizedAttemptsChart'), {
+                type: 'bar',
+                data: unauthorizedAttemptsData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
     @elseif(auth()->user()->role == "Citizen")
         <div class="py-12">
         </div>
