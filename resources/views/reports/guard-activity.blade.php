@@ -57,7 +57,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Guard Name</label>
-                        <select class="w-full border rounded-lg p-2">
+                        <select class="select2 w-full border rounded-lg p-2">
                             <option>All Guards</option>
                             <option>John Doe</option>
                             <option>Jane Smith</option>
@@ -66,7 +66,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Shift</label>
-                        <select class="w-full border rounded-lg p-2">
+                        <select class="select2 w-full border rounded-lg p-2">
                             <option>All Shifts</option>
                             <option>Morning (6AM-2PM)</option>
                             <option>Evening (2PM-10PM)</option>
@@ -75,7 +75,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
-                        <select class="w-full border rounded-lg p-2">
+                        <select class="select2 w-full border rounded-lg p-2">
                             <option>Today</option>
                             <option>Last 7 Days</option>
                             <option>This Month</option>
@@ -258,6 +258,11 @@
             const style = document.createElement('style');
             style.textContent = `#filters {transition: opacity 0.3s ease, transform 0.3s ease;}`;
             document.head.appendChild(style);
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
         </script>
     @endpush
 

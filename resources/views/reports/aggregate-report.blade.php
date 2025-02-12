@@ -67,7 +67,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div>
                             <x-label for="time_period" value="{{ __('Time Period') }}" />
-                            <select id="time_period" name="filter[time_period]" class="w-full border rounded-lg p-2">
+                            <select id="time_period" name="filter[time_period]"
+                                class=" select2 w-full border rounded-lg p-2">
                                 <option value="7">Last 7 Days</option>
                                 <option value="30">Last 30 Days</option>
                                 <option value="90">Last 90 Days</option>
@@ -76,7 +77,7 @@
                         </div>
                         <div>
                             <x-label for="location" value="{{ __('Location') }}" />
-                            <select id="location" name="filter[location]" class="w-full border rounded-lg p-2">
+                            <select id="location" name="filter[location]" class="select2 w-full border rounded-lg p-2">
                                 <option value="all">All Locations</option>
                                 <option value="gate1">Gate 1</option>
                                 <option value="gate2">Gate 2</option>
@@ -419,6 +420,11 @@
             const style = document.createElement('style');
             style.textContent = `#filters {transition: opacity 0.3s ease, transform 0.3s ease;}`;
             document.head.appendChild(style);
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
         </script>
     @endpush
     </body>

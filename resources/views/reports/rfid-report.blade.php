@@ -55,7 +55,8 @@
                         </div>
                         <div>
                             <x-label for="status" value="{{ __('Status') }}" />
-                            <select id="status" name="filter[status]" class="mt-1 block w-full rounded-md shadow-sm">
+                            <select id="status" name="filter[status]"
+                                class="select2 mt-1 block w-full rounded-md shadow-sm">
                                 <option value="">Select Status</option>
                                 <option value="active" {{ request('filter.status') == 'active' ? 'selected' : '' }}>
                                     Active
@@ -226,6 +227,11 @@
                     const style = document.createElement('style');
                     style.textContent = `#filters {transition: opacity 0.3s ease, transform 0.3s ease;}`;
                     document.head.appendChild(style);
+                </script>
+                <script>
+                    $(document).ready(function() {
+                        $('.select2').select2();
+                    });
                 </script>
             @endpush
 </x-app-layout>

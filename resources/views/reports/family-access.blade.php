@@ -50,35 +50,38 @@
                     class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Primary Member</label>
-                        <select class="w-full border rounded-lg p-2">
-
+                        <select class="select2 w-full border rounded-lg p-2">
+                            <option value="">Select a member</option>
                         </select>
                     </div>
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Relationship</label>
-                        <select class="w-full border rounded-lg p-2">
-
+                        <select class="select2 w-full border rounded-lg p-2">
+                            <option value="">Select a member</option>
                         </select>
                     </div>
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Time Period</label>
-                        <select class="w-full border rounded-lg p-2">
+                        <select class="select2 w-full border rounded-lg p-2">
                             <option>Last 7 Days</option>
                             <option>Last 30 Days</option>
                             <option>Last 90 Days</option>
                             <option>Custom Range</option>
                         </select>
                     </div>
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Group By</label>
-                        <select class="w-full border rounded-lg p-2" id="familyGroupBySelect">
+                        <select class="select2 w-full border rounded-lg p-2">
                             <option value="none">No Grouping</option>
                             <option value="relationship">Relationship</option>
                             <option value="accessTime">Access Time</option>
                             <option value="frequency">Visit Frequency</option>
                         </select>
-
                     </div>
+
                     <div class="md:col-span-3 flex justify-end">
                         <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
                             Apply Filters
@@ -235,6 +238,11 @@
                 const style = document.createElement('style');
                 style.textContent = `#filters {transition: opacity 0.3s ease, transform 0.3s ease;}`;
                 document.head.appendChild(style);
+            </script>
+            <script>
+                $(document).ready(function() {
+                    $('.select2').select2();
+                });
             </script>
         @endpush
 </x-app-layout>

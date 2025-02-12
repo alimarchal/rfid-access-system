@@ -61,7 +61,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Access Type</label>
-                        <select name="type" class="w-full border rounded-lg p-2">
+                        <select name="type" class="select2 w-full border rounded-lg p-2">
                             <option value="" {{ request('type') == '' ? 'selected' : '' }}>All</option>
                             <option value="entry" {{ request('type') == 'entry' ? 'selected' : '' }}>Entry</option>
                             <option value="exit" {{ request('type') == 'exit' ? 'selected' : '' }}>Exit</option>
@@ -256,6 +256,11 @@
             const style = document.createElement('style');
             style.textContent = `#filters {transition: opacity 0.3s ease, transform 0.3s ease;}`;
             document.head.appendChild(style);
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
         </script>
     @endpush
 </x-app-layout>
