@@ -40,7 +40,7 @@
                             {{--  <div class="text-3xl font-bold leading-8">{{ \App\Models\User::count() }}</div>  --}}
                             <div class="mt-1 text-base font-extrabold text-black">Reports</div>
                         </div>
-                        <img src="{{ url('icons-images/user.png') }}" alt="Users" class="h-14 w-14">
+                        <img src="{{ url('icons-images/reports.png') }}" alt="Users" class="h-14 w-14">
                     </div>
                 </a>
             </div>
