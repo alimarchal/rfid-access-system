@@ -197,17 +197,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var trafficOptions = {
-    chart: {
-        type: 'line',
-        toolbar: { show: false }  // This hides the zoom and other controls
-    },
-    series: [
-        { name: 'Entries', data: [12, 5, 45, 28, 52, 20] },
-        { name: 'Exits', data: [8, 3, 30, 25, 48, 25] }
-    ],
-    xaxis: { categories: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'] }
-};
-new ApexCharts(document.querySelector("#trafficChart"), trafficOptions).render();
+            chart: {
+                type: 'line',
+                toolbar: { show: false }  // This hides the zoom and other controls
+            },
+            series: [
+                { name: 'Entries', data: [12, 5, 45, 28, 52, 20] },
+                { name: 'Exits', data: [8, 3, 30, 25, 48, 25] }
+            ],
+            xaxis: { categories: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'] }
+        };
+        new ApexCharts(document.querySelector("#trafficChart"), trafficOptions).render();
 
 
             var vehicleOptions = {
