@@ -81,7 +81,7 @@
                             <div class="p-5 flex justify-between">
                                 <div>
                                     <div class="text-1xl font-medium leading-8">Total Enteries</div>
-                                    <div class="mt-1 text-base font-semibold  text-black">12</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">{{ $total_entries }}</div>
                                 </div>
                                 <img src="{{url('icons-images/enteries.png') }}" alt="Enteries" class="h-16 w-16">
                             </div>
@@ -119,7 +119,7 @@
                             <div class="p-5 flex justify-between">
                                 <div>
                                     <div class="text-1xl font-medium leading-8">Access Granted</div>
-                                    <div class="mt-1 text-base font-semibold  text-black">23</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">{{ $today_total_access_granted }}</div>
                                 </div>
                                 <img src="{{url('icons-images/granted.png') }}" alt="Access" class="h-16 w-16">
                             </div>
@@ -129,7 +129,7 @@
                             <div class="p-5 flex justify-between">
                                 <div>
                                     <div class="text-1xl font-medium leading-8">Access Denied</div>
-                                    <div class="mt-1 text-base font-semibold  text-black">21</div>
+                                    <div class="mt-1 text-base font-semibold  text-black">{{ $today_total_access_denied }}</div>
                                 </div>
                                 <img src="{{url('icons-images/denied.png') }}" alt="Denied" class="h-16 w-16">
                             </div>
@@ -146,7 +146,7 @@
                         </a>
                     </div>
 
-                
+
                     <!DOCTYPE html>
 <html>
 <head>
@@ -168,7 +168,7 @@
                 <div id="trafficChart"></div>
             </div>
         </div>
-        
+
         <div class="bg-white rounded-lg shadow p-6 transform transition duration-300 hover:scale-105 active:scale-95 cursor-pointer">
             <h2 class="text-xl font-semibold mb-4">Weekly Vehicle Traffic</h2>
             <div class="chart-container">
@@ -176,7 +176,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="bg-white rounded-lg shadow p-6 transform transition duration-300 hover:scale-105 active:scale-95 cursor-pointer">
             <h2 class="text-xl font-semibold mb-4">RFID Card Status Distribution</h2>
@@ -193,11 +193,11 @@
     </div>
 </body>
 
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var trafficOptions = {
-    chart: { 
+    chart: {
         type: 'line',
         toolbar: { show: false }  // This hides the zoom and other controls
     },
@@ -216,10 +216,10 @@ new ApexCharts(document.querySelector("#trafficChart"), trafficOptions).render()
                 xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }
             };
             var vehicleOptions = {
-    chart: { 
+    chart: {
         type: 'bar',
         height: "100%",  // Ensures it fits inside the container
-        width: "100%" 
+        width: "100%"
     },
     series: [{ name: 'Vehicle Count', data: [150, 180, 165, 190, 210, 140, 120] }],
     xaxis: { categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] }
@@ -227,10 +227,10 @@ new ApexCharts(document.querySelector("#trafficChart"), trafficOptions).render()
 new ApexCharts(document.querySelector("#vehicleChart"), vehicleOptions).render();
 
 var cardStatusOptions = {
-    chart: { 
+    chart: {
         type: 'donut',
         height: "100%",  // Ensures it fits inside the container
-        width: "100%" 
+        width: "100%"
     },
     series: [750, 120, 30],
     labels: ['Active', 'Expired', 'Inactive']
