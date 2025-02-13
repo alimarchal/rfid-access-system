@@ -59,7 +59,7 @@
                         <div>
                             <x-label for="location_id" value="{{ __('Location') }}" />
                             <select id="location_id" name="filter[location_id]"
-                                class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                class="select2 mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
                                 <option value="">Select Location</option>
                                 @foreach (\App\Models\Location::orderBy('city')->get() as $location)
                                     <option value="{{ $location->id }}"
@@ -217,6 +217,11 @@
             const style = document.createElement('style');
             style.textContent = `#filters {transition: opacity 0.3s ease, transform 0.3s ease;}`;
             document.head.appendChild(style);
+        </script>
+        <script>
+            $(document).ready(function() {
+                $('.select2').select2();
+            });
         </script>
     @endpush
 </x-app-layout>
