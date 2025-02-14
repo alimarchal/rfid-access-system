@@ -56,4 +56,5 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
      Route::get('reports/rfid-report', [ReportController::class, 'RfidReport'])->name('rfid.report');
      Route::get('reports/guard-activity', [ReportController::class, 'guardReport'])->name('reports.guard.activity');
      Route::get('reports/aggregate-report', [ReportController::class, 'AgriReport'])->name('reports.aggregate.report');
+     
     });
