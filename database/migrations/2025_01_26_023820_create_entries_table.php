@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('rfid_card_id')->constrained()->onDelete('cascade');
             $table->foreignId('vehicle_id')->nullable()->constrained();
             $table->boolean('access_granted')->default(false);
+            
             $table->datetime('time_in')->nullable();
             $table->datetime('time_out')->nullable();
             $table->string('gate_id')->nullable();

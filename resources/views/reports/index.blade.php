@@ -10,7 +10,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight inline-block">
-            Settings
+            Reports
         </h2>
 
         <div class="flex justify-center items-center float-right">
@@ -32,24 +32,54 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="grid grid-cols-12 mb-4 gap-6">
-                <a href="{{ route('reports.all-reports') }}"
-                    class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-3 intro-y bg-white block">
+            <div class="grid grid-cols-3 gap-6 mb-4">
+                <a href="{{ route('reports.family.access') }}"
+                    class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-1 intro-y bg-white block">
                     <div class="p-5 flex justify-between">
                         <div>
-                            {{--  <div class="text-3xl font-bold leading-8">{{ \App\Models\User::count() }}</div>  --}}
-                            <div class="mt-1 text-base font-extrabold text-black">Reports</div>
+                            <div class="mt-1 text-lg font-medium text-black">Family Report</div>
                         </div>
-                        <img src="{{ url('icons-images/reports.png') }}" alt="Users" class="h-14 w-14">
+                        <img src="{{ url('icons-images/familyreports.png') }}" alt="Family" class="h-14 w-14">
+                    </div>
+                </a>
+                <a href="{{ route('rfid.report') }}"
+                    class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-1 intro-y bg-white block">
+                    <div class="p-5 flex justify-between">
+                        <div>
+                            <div class="mt-1 text-lg font-medium text-black">RFID Reports</div>
+                        </div>
+                        <img src="{{ url('icons-images/rfid.png') }}" alt="Rfid" class="h-14 w-14">
+                    </div>
+                </a>
+                <a href="{{ route('reports.access-activity') }}"
+                    class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-1 intro-y bg-white block">
+                    <div class="p-5 flex justify-between">
+                        <div>
+                            <div class="mt-1 text-lg font-medium text-black">Access Activity Reports</div>
+                        </div>
+                        <img src="{{ url('icons-images/access1.png') }}" alt="Access" class="h-14 w-14">
+                    </div>
+                </a>
+                <a href="{{ route('reports.guard.activity') }}"
+                    class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-1 intro-y bg-white block">
+                    <div class="p-5 flex justify-between">
+                        <div>
+                            <div class="mt-1 text-lg font-medium text-black">Guard Activity Reports</div>
+                        </div>
+                        <img src="{{ url('icons-images/guardreports.png') }}" alt="Guard" class="h-14 w-14">
+                    </div>
+                </a>
+                <a href="{{ route('reports.aggregate.report') }}"
+                    class="transform hover:scale-110 transition duration-300 shadow-xl rounded-lg col-span-1 intro-y bg-white block">
+                    <div class="p-5 flex justify-between">
+                        <div>
+                            <div class="mt-1 text-lg font-medium text-black">Aggregate Reports</div>
+                        </div>
+                        <img src="{{ url('icons-images/aggregate.png') }}" alt="Aggregate" class="h-14 w-14">
                     </div>
                 </a>
             </div>
         </div>
-    </div>
-
-
-    </div>
-    </div>
     </div>
 
 

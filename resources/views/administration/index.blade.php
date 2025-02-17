@@ -10,7 +10,7 @@
 
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight inline-block">
-            Settings
+            Administration
         </h2>
 
         <div class="flex justify-center items-center float-right">
@@ -38,7 +38,7 @@
                     <div class="p-5 flex justify-between">
                         <div>
                             <div class="text-3xl font-bold leading-8">{{ \App\Models\User::count() }}</div>
-                            <div class="mt-1 text-base font-extrabold text-black">Users</div>
+                            <div class="mt-1 text-base font-extrabold text-black">Citizens</div>
                         </div>
                         <img src="{{ url('icons-images/user.png') }}" alt="Users" class="h-14 w-14">
                     </div>
