@@ -198,7 +198,7 @@ class RfidCardController extends Controller
         try {
             $validated = $request->validate([
                 'user_id' => 'required|exists:users,id',
-                'expiry_date' => 'nullable|date|after:today'
+                'expiry_date' => 'required|date|after:today',
             ]);
 
             DB::beginTransaction();
